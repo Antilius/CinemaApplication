@@ -1,8 +1,13 @@
 package GUI;
 
+import ObjectsInCinema.CinemaHall;
+import ObjectsInCinema.Movie;
+import ObjectsInCinema.MovieType;
+import People.Administrator;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -44,5 +49,23 @@ public class MainFrame extends JFrame{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
+        
+        ///////////// na potrzeby testowania dodawania seansów
+        
+        ///// sale kinowe (one chyba i tak muszą być zrobione na tym poziomie)
+        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
+        cinemaHalls.add(new CinemaHall(1,20,30));
+        cinemaHalls.add(new CinemaHall(2,18,26));
+        cinemaHalls.add(new CinemaHall(3,22,40));
+        
+        
+        Administrator admin = new Administrator("Hubert", "Lasota", 511713563, "email", "hubert", "hubert");
+        Movie movie = new Movie("Title", "Director", MovieType.ACTION, 16, 300);
+        admin.makingNewShowing(movie, 1, "21:30", cinemaHalls);
+        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
+        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
+        admin.makingNewShowing(movie, 3, "13:00", cinemaHalls);
+        admin.makingNewShowing(movie, 3, "21:00", cinemaHalls);
+        admin.makingNewShowing(movie, 3, "19:00", cinemaHalls);
     }
 }
