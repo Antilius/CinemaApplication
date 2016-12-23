@@ -1,10 +1,15 @@
 package GUI;
 
+import ObjectsInCinema.CinemaHall;
+import ObjectsInCinema.Movie;
+import ObjectsInCinema.MovieType;
+import People.Administrator;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -81,5 +86,18 @@ public class BasicFrame extends JPanel{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
+        
+        /////////////////////////////
+        //////// dodane dla testowania
+        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
+        cinemaHalls.add(new CinemaHall(1,20,30));
+        cinemaHalls.add(new CinemaHall(2,18,26));
+        cinemaHalls.add(new CinemaHall(3,22,40));
+        Administrator admin = new Administrator("1","Hubert", "Surname", 5631351, "email", "hubert", "hubert" );
+        Movie movie = new Movie("Title", "Director", MovieType.ACTION, 16, 150);
+        admin.makingNewShowing(movie, 1, "21:30", cinemaHalls);
+        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
+        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
+        
     }
 }
