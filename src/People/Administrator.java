@@ -14,24 +14,15 @@ import java.util.ArrayList;
  *
  * @author Hubert
  */
-public class Administrator {
-    private String id;
-    private String name;
-    private String surname;
-    private int phoneNumber;
-    private String email;
-    private String login;
-    private String password;
-
-    public Administrator(String id, String name, String surname, int phoneNumber, String email, String login, String password) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.login = login;
-        this.password = password;
+public class Administrator extends User{
+    
+    private boolean canChange;
+    
+    public Administrator(String name, String surname, int phoneNumber, String email, String login, String password) {
+        super(name, surname, phoneNumber, email, login, password);
+        this.canChange = true;
     }
+    
     
     public void makingNewShowing (Movie movie, int hallNumber, String hour, ArrayList cinemaHalls){
         Showing showing = new Showing(null, 0 , null);
@@ -61,6 +52,23 @@ public class Administrator {
         else{
                     System.out.println("Nie możesz dodać takiego seansu !");
                     }
+        }else{
+            for (int j=part-1; j<neededHall.engaged.length; j++){
+            if(neededHall.engaged[j]!=0)
+                possibleToAdd = false;
+        }
+            
+        if(possibleToAdd == true){
+            showing = new Showing(movie, hallNumber, hour);
+            for (int j=part-1; j<neededHall.engaged.length; j++){
+            neededHall.engaged[j]=1;
+            }
+            System.out.println("Seans pomyślnie dodany !");
+        }
+        else{
+                    System.out.println("Nie możesz dodać takiego seansu !");
+                    }
+            
         }
         }
     }
