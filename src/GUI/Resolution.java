@@ -88,7 +88,7 @@ public class Resolution{
                     System.err.println(ex.getClass().toString()+" while creating properties file");
                 }
                 windowToClose.setVisible(false);
-                BasicFrame.runGUI(width, height);
+                MainFrame.runGUI(width, height);
             }
         });
         return closingButton;
