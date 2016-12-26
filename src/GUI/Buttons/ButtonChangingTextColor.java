@@ -64,7 +64,7 @@ public class ButtonChangingTextColor extends ChangingPanelButtonWithText impleme
     public void mouseReleased(MouseEvent event) {
         if(event.getSource() == this){
             ((MainPanel)this.context).removeAll();
-            ((MainPanel)this.context).paintThisAfterProfileOpen(((MainPanel)this.context).getWidth(),((MainPanel)this.context).getHeight());
+            ((MainPanel)this.context).paintProfile(((MainPanel)this.context).getWidth(),((MainPanel)this.context).getHeight());
             ((MainPanel)this.context).revalidate();
             ((MainPanel)this.context).repaint();
         }

@@ -1,6 +1,5 @@
 package GUI.Buttons;
 
-import GUI.Buttons.ButtonChangingTextColor;
 import GUI.RepertoireForDayPanel;
 import PersonalizedDates.DateFormatting;
 import java.awt.Color;

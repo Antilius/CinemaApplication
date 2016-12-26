@@ -96,7 +96,7 @@ public final class MainPanel extends JPanel{
         rep.setBounds((width-rep_size.width)/2, 200, rep_size.width, rep_size.height);
     }
     
-    public void paintThisAfterProfileOpen(int width,int height){
+    public void paintProfile(int width,int height){
         //setting properties
         this.setLayout(null);
         this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło   

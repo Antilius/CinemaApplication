@@ -21,13 +21,26 @@ public class MainFrame extends JFrame{
         this.setSize(new Dimension(width, height));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(300,200); 
-        
+        this.setResizable(true);
         //adding components       
         JPanel GUIwhenAppOpened = new MainPanel(width, height);
         this.add(GUIwhenAppOpened); 
         this.setVisible(true);         
     }
    
+    public static int setPossibleDimensionWidth(){
+        File prop = new File("properties.txt");
+        Scanner propertiesFileScanner = null;
+        try {
+            propertiesFileScanner = new Scanner(prop);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex.getClass().toString() + " while scanning file.");
+        }
+        int width = propertiesFileScanner.nextInt();
+        propertiesFileScanner.close();
+        return width;
+    }
+    
     public static void runGUI(int width, int height){
         new MainFrame(width, height);
     }
