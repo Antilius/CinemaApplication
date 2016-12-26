@@ -23,7 +23,7 @@ public class MainFrame extends JFrame{
         this.setLocation(300,200); 
         
         //adding components       
-        JPanel GUIwhenAppOpened = new StartPanel(this,width, height);
+        JPanel GUIwhenAppOpened = new MainPanel(width, height);
         this.add(GUIwhenAppOpened); 
         this.setVisible(true);         
     }
