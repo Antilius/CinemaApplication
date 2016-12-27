@@ -17,7 +17,7 @@ public class User {
     private String email;
     private String login;
     private String password;
-    
+    private boolean canChange;   
     int i=1;
     
     public User(String name, String surname, int phoneNumber, String email, String login, String password) {
@@ -28,6 +28,7 @@ public class User {
         this.email = email;
         this.login = login;
         this.password = password;
+        this.canChange = false;
     }
     public String getId() {
         return id;

@@ -1,9 +1,7 @@
 package GUI;
 
+import Memory.HallsInMemory;
 import ObjectsInCinema.CinemaHall;
-import ObjectsInCinema.Movie;
-import ObjectsInCinema.MovieType;
-import People.Administrator;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,23 +60,26 @@ public class MainFrame extends JFrame{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
-        
-        ///////////// na potrzeby testowania dodawania seansów
-        
-        ///// sale kinowe (one chyba i tak muszą być zrobione na tym poziomie)
+        /*
+        int[] time = new int[144];
+        for(int i=0; i<144; i++)
+            time[i]=0;
+        int number =8;
+        int rows = 10;
+        int seats = 15;
+        int [][] places = new int[10][15];
+        for(int i=0; i<10; i++){
+            for(int j=0; j<15; j++){
+                places[i][j]=0;
+            }
+        }
         ArrayList<CinemaHall> cinemaHalls = new ArrayList();
-        cinemaHalls.add(new CinemaHall(1,20,30));
-        cinemaHalls.add(new CinemaHall(2,18,26));
-        cinemaHalls.add(new CinemaHall(3,22,40));
-        
-        
-        Administrator admin = new Administrator("Hubert", "Lasota", 511713563, "email", "hubert", "hubert");
-        Movie movie = new Movie("Title", "Director", MovieType.ACTION, 16, 300);
-        admin.makingNewShowing(movie, 1, "21:30", cinemaHalls);
-        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
-        admin.makingNewShowing(movie, 2, "21:00", cinemaHalls);
-        admin.makingNewShowing(movie, 3, "13:00", cinemaHalls);
-        admin.makingNewShowing(movie, 3, "21:00", cinemaHalls);
-        admin.makingNewShowing(movie, 3, "19:00", cinemaHalls);
+        CinemaHall ch = new CinemaHall(number, rows, seats, time, places);
+        cinemaHalls.add(ch);
+        cinemaHalls.add(ch);
+        cinemaHalls.add(ch);
+        HallsInMemory his = new HallsInMemory();
+        his.saveInFile(cinemaHalls);
+                */
     }
 }

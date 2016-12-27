@@ -14,15 +14,24 @@ public class CinemaHall {
     private final int number;
     private final int numberOfRows;
     private final int seatsInRow;
-    public int[] engaged = new int[144];
+    public int[] timeEngaged = new int[144];
+    public int[][] places;
     
-    public CinemaHall(int number, int numberOfRows, int seatsInRow) {
+    public CinemaHall(int number, int numberOfRows, int seatsInRow, int[] timeEngaged, int[][] places) {
         this.number = number;
         this.numberOfRows = numberOfRows;
         this.seatsInRow = seatsInRow;
-        for(int i=0; i<engaged.length; i++){
-            engaged[i]=0;
+        this.timeEngaged = timeEngaged;
+        this.places = places;
+        /*for(int i=0; i<timeEngaged.length; i++){
+            timeEngaged[i]=0;
         }
+        this.places = new int[numberOfRows][seatsInRow];
+        for(int k=0; k<numberOfRows; k++){
+            for(int l=0; l<seatsInRow; l++){
+                places[k][l]=0;
+            }
+        }*/
     }
 
     public int getNumber() {
@@ -36,6 +45,16 @@ public class CinemaHall {
     public int getSeatsInRow() {
         return seatsInRow;
     }
+
+    public int[] getTimeEngaged() {
+        return timeEngaged;
+    }
+
+    public int[][] getPlaces() {
+        return places;
+    }
+    
+    
     
     
     

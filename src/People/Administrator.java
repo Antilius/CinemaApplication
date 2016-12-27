@@ -24,10 +24,12 @@ public class Administrator extends User{
     }
     
     
+    
+    
     public void makingNewShowing (Movie movie, int hallNumber, String hour, ArrayList cinemaHalls){
         Showing showing = new Showing(null, 0 , null);
-        CinemaHall neededHall = new CinemaHall(0,0,0);
-        CinemaHall cH = new CinemaHall(0,0,0);
+        CinemaHall neededHall = new CinemaHall(0,0,0,null,null);
+        CinemaHall cH = new CinemaHall(0,0,0,null,null);
         boolean possibleToAdd = true;
         for (Object cinemaHall : cinemaHalls) {
                 cH = (CinemaHall) cinemaHall;
@@ -36,16 +38,16 @@ public class Administrator extends User{
         }
         int part = Showing.hoursToPartsOFTime(hour);
         int duration = movie.getDuration()/10;
-        if(part+duration<=neededHall.engaged.length){
+        if(part+duration<=neededHall.timeEngaged.length){
         for (int j=part-1; j<part+duration; j++){
-            if(neededHall.engaged[j]!=0)
+            if(neededHall.timeEngaged[j]!=0)
                 possibleToAdd = false;
         }
             
         if(possibleToAdd == true){
             showing = new Showing(movie, hallNumber, hour);
             for (int j=part-1; j<part+duration; j++){
-            neededHall.engaged[j]=1;
+            neededHall.timeEngaged[j]=1;
             }
             System.out.println("Seans pomyślnie dodany !");
         }
@@ -53,15 +55,15 @@ public class Administrator extends User{
                     System.out.println("Nie możesz dodać takiego seansu !");
                     }
         }else{
-            for (int j=part-1; j<neededHall.engaged.length; j++){
-            if(neededHall.engaged[j]!=0)
+            for (int j=part-1; j<neededHall.timeEngaged.length; j++){
+            if(neededHall.timeEngaged[j]!=0)
                 possibleToAdd = false;
         }
             
         if(possibleToAdd == true){
             showing = new Showing(movie, hallNumber, hour);
-            for (int j=part-1; j<neededHall.engaged.length; j++){
-            neededHall.engaged[j]=1;
+            for (int j=part-1; j<neededHall.timeEngaged.length; j++){
+            neededHall.timeEngaged[j]=1;
             }
             System.out.println("Seans pomyślnie dodany !");
         }
