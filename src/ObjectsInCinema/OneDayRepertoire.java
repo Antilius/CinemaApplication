@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ObjectsInCinema;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Hubert
- */
-public class Repertoire {
+public class OneDayRepertoire {
     
-    public void makingNewShowing (Movie movie, int hallNumber, String hour, ArrayList cinemaHalls){
-        Showing showing = new Showing(null, 0 , null);
-        CinemaHall neededHall = new CinemaHall(0,0,0,null,null);
+    ArrayList<Showing> repertoireForDay = new ArrayList();
+   
+    public Showing makingNewShowing (Movie movie, int hallNumber, String hour, ArrayList cinemaHalls){
+        Showing showing = new Showing();
+        CinemaHall neededHall = new CinemaHall();
         boolean possibleToAdd = true;
         for (Object cinemaHall : cinemaHalls) {
                 CinemaHall cH = (CinemaHall) cinemaHall;
@@ -39,12 +32,11 @@ public class Repertoire {
         else{
                     System.out.println("Nie możesz dodać takiego seansu !");
                     }
-        }/*else{
+        }else{
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
             if(neededHall.timeEngaged[j]!=0)
                 possibleToAdd = false;
         }
-            
         if(possibleToAdd == true){
             showing = new Showing(movie, hallNumber, hour);
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
@@ -55,8 +47,15 @@ public class Repertoire {
         else{
                     System.out.println("Nie możesz dodać takiego seansu !");
                     }
-            
-        }*/
+        }
+        return showing;
         }
     
+    public void addShowingToRepertoire(Showing showing){
+        repertoireForDay.add(showing);
+    }
+
+    public ArrayList<Showing> getRepertoireForDay() {
+        return repertoireForDay;
+    }
 }

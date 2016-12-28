@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ObjectsInCinema;
 
 import java.text.ParseException;
@@ -10,16 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Hubert
- */
 public class Showing {
     // showing - seans (zawiera informacje o tytule filmu, numerze sali i godzinie)
     
     private Movie movie;
     private int hallNumber;
     private String hour;
+    
+    public Showing(){}
         
     public Showing(Movie movie, int hallNumber, String hour) {
         this.movie = movie;

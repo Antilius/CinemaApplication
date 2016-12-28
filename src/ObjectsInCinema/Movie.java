@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ObjectsInCinema;
 
-/**
- *
- * @author Hubert
- */
 public class Movie {
     
     private String title;
@@ -16,6 +7,8 @@ public class Movie {
     private MovieType type;
     private int age;
     private int duration; // zakladamy ze czas trwania jest podany w minutach
+    
+    public Movie(){}
 
     public Movie(String title, String director, MovieType type, int age, int duration) {
         this.title = title;

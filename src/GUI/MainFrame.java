@@ -1,11 +1,13 @@
 package GUI;
 
 import Memory.HallsInMemory;
+import Memory.OneDayRepertoireInMemory;
 import Memory.PeopleInMemory;
 import ObjectsInCinema.CinemaHall;
 import ObjectsInCinema.Movie;
 import ObjectsInCinema.MovieType;
-import ObjectsInCinema.Repertoire;
+import ObjectsInCinema.OneDayRepertoire;
+import ObjectsInCinema.Showing;
 import People.Person;
 import java.awt.Dimension;
 import java.io.File;
@@ -65,62 +67,45 @@ public class MainFrame extends JFrame{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
-        /*
-        int[] time = new int[144];
-        for(int i=0; i<144; i++)
-            time[i]=0;
-        int number =8;
-        int rows = 10;
-        int seats = 15;
-        int [][] places = new int[10][15];
-        for(int i=0; i<10; i++){
-            for(int j=0; j<15; j++){
-                places[i][j]=0;
-            }
-        }
-        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
-        CinemaHall ch = new CinemaHall(number, rows, seats, time, places);
-        cinemaHalls.add(ch);
-        cinemaHalls.add(ch);
-        cinemaHalls.add(ch);
-        HallsInMemory his = new HallsInMemory();
-        his.saveInFile(cinemaHalls);
-                */
         
-        /// testowanie PeopleInMemory - save
-        /*
-        ArrayList<Person> users = new ArrayList();
-        Person user1 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
-        Person user2 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
-        Person user3 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        PeopleInMemory uim = new PeopleInMemory();
-        uim.saveInFile(users);
-                */
-        //// testowanie PeopleInMemory - load
-        /*
         PeopleInMemory pim = new PeopleInMemory();
-        ArrayList<Person> users = new ArrayList();
-        File people = new File("users.txt");
-        users = pim.readFromFile(people);
-        System.out.println(users.size());
-        System.out.println(users.get(2).getPassword());
-                */
-        /*
-        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
+        OneDayRepertoireInMemory odrim = new OneDayRepertoireInMemory();
         HallsInMemory his = new HallsInMemory();
-        File file = new File("cinemaHalls.txt");
-        cinemaHalls = his.readFromFile(file);
-        Repertoire rep = new Repertoire();
+        Showing showing = new Showing();
+        OneDayRepertoire rep = new OneDayRepertoire();
         Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
-        rep.makingNewShowing(movie, 1, "16.30", cinemaHalls);
-        rep.makingNewShowing(movie, 1, "10.30", cinemaHalls);
-        rep.makingNewShowing(movie, 2, "10.10", cinemaHalls);
-        rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
-        rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
         
-        */
+        File halls = new File("cinemaHalls.txt");
+        File people = new File("users.txt");
+        
+        ArrayList<Person> users = new ArrayList();
+        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
+        ArrayList<Showing> repertoireForDay = new ArrayList();
+        
+        users = pim.readFromFile(people);
+        cinemaHalls = his.readFromFile(halls);
+        
+        showing = rep.makingNewShowing(movie, 1, "16.30", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 1, "10.30", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 2, "10.10", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
+        //showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
+        //rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 3, "23.10", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
+        
+        repertoireForDay = rep.getRepertoireForDay();
+        
+        his.saveInFile(cinemaHalls);
+        odrim.saveInFile(repertoireForDay);
+        repertoireForDay = new ArrayList();
+        File repo = new File("repertoireFor(data).txt");
+        repertoireForDay = odrim.readFromFile(repo);
+        System.out.println(repertoireForDay.size());
+                
     }
 }

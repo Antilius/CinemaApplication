@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Memory;
 
 import ObjectsInCinema.CinemaHall;
@@ -12,10 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Hubert
- */
 public class HallsInMemory implements ConnectWithMemory{
         
     
@@ -40,6 +31,7 @@ public class HallsInMemory implements ConnectWithMemory{
                for(int i=0; i<cinemaHall.getTimeEngaged().length; i++){
                    write.print(cinemaHall.getTimeEngaged()[i]);
                }
+               write.println();
                for(int i=0; i<cinemaHall.getNumberOfRows(); i++){
                    for(int j=0; j<cinemaHall.getSeatsInRow(); j++){
                        write.print(cinemaHall.getPlaces()[i][j]);
