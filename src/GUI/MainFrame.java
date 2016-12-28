@@ -1,5 +1,6 @@
 package GUI;
 
+import Memory.Day;
 import Memory.HallsInMemory;
 import Memory.OneDayRepertoireInMemory;
 import Memory.PeopleInMemory;
@@ -13,6 +14,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -68,6 +70,10 @@ public class MainFrame extends JFrame{
             }
         }
         
+        Day day = new Day();
+        Date date = day.getDate();
+        String sDate = day.dateToString(date);
+        
         PeopleInMemory pim = new PeopleInMemory();
         OneDayRepertoireInMemory odrim = new OneDayRepertoireInMemory();
         HallsInMemory his = new HallsInMemory();
@@ -75,7 +81,7 @@ public class MainFrame extends JFrame{
         OneDayRepertoire rep = new OneDayRepertoire();
         Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
         
-        File halls = new File("cinemaHalls.txt");
+        File halls = new File("cinemaHalls"+sDate+".txt");
         File people = new File("users.txt");
         
         ArrayList<Person> users = new ArrayList();
@@ -91,8 +97,8 @@ public class MainFrame extends JFrame{
         rep.addShowingToRepertoire(showing);
         showing = rep.makingNewShowing(movie, 2, "10.10", cinemaHalls);
         rep.addShowingToRepertoire(showing);
-        //showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
-        //rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
         showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
         rep.addShowingToRepertoire(showing);
         showing = rep.makingNewShowing(movie, 3, "23.10", cinemaHalls);
@@ -102,10 +108,9 @@ public class MainFrame extends JFrame{
         
         his.saveInFile(cinemaHalls);
         odrim.saveInFile(repertoireForDay);
-        repertoireForDay = new ArrayList();
-        File repo = new File("repertoireFor(data).txt");
-        repertoireForDay = odrim.readFromFile(repo);
-        System.out.println(repertoireForDay.size());
+
+        
+        
                 
     }
 }
