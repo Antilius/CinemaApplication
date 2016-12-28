@@ -26,7 +26,21 @@ public class Showing {
         this.hallNumber = hallNumber;
         this.hour = hour;
     }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public int getHallNumber() {
+        return hallNumber;
+    }
+
+    public String getHour() {
+        return hour;
+    }
  
+    
+    
     public String dateToString(){
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -46,4 +60,7 @@ public class Showing {
         int boxNumber = Integer.valueOf(hour.substring(0, 2))*6+Integer.valueOf(hour.substring(3, 5))/10;
         return boxNumber;
     }
+    
+    
+    
 }

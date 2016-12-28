@@ -6,15 +6,11 @@
 package Memory;
 
 import ObjectsInCinema.CinemaHall;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,12 +23,9 @@ public class HallsInMemory implements ConnectWithMemory{
     int numberOfRows;
     int seatsInRow;
     int [][] places;
-    int [] timeEngaged = new int [144];
+    int [] timeEngaged;
     String row;
     String time;
-
-    public HallsInMemory() {
-    }
     
     @Override
     public void saveInFile(ArrayList cinemaHalls) {
@@ -70,6 +63,7 @@ public class HallsInMemory implements ConnectWithMemory{
             numberOfRows = Integer.valueOf(reader.nextLine());
             seatsInRow = Integer.valueOf(reader.nextLine());
             time = reader.nextLine();
+            timeEngaged = new int [144];
             for(int i=0; i<timeEngaged.length; i++){
                 timeEngaged[i] = Integer.valueOf(time.substring(0,1));
                 time = time.substring(1);

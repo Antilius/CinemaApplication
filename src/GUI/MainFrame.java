@@ -1,7 +1,12 @@
 package GUI;
 
 import Memory.HallsInMemory;
+import Memory.PeopleInMemory;
 import ObjectsInCinema.CinemaHall;
+import ObjectsInCinema.Movie;
+import ObjectsInCinema.MovieType;
+import ObjectsInCinema.Repertoire;
+import People.Person;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -81,5 +86,41 @@ public class MainFrame extends JFrame{
         HallsInMemory his = new HallsInMemory();
         his.saveInFile(cinemaHalls);
                 */
+        
+        /// testowanie PeopleInMemory - save
+        /*
+        ArrayList<Person> users = new ArrayList();
+        Person user1 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
+        Person user2 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
+        Person user3 = new Person("Hubert", "Lasota", 511713563, "lasota.hubert@op.pl", "hubert", "hubert", true);
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        PeopleInMemory uim = new PeopleInMemory();
+        uim.saveInFile(users);
+                */
+        //// testowanie PeopleInMemory - load
+        /*
+        PeopleInMemory pim = new PeopleInMemory();
+        ArrayList<Person> users = new ArrayList();
+        File people = new File("users.txt");
+        users = pim.readFromFile(people);
+        System.out.println(users.size());
+        System.out.println(users.get(2).getPassword());
+                */
+        /*
+        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
+        HallsInMemory his = new HallsInMemory();
+        File file = new File("cinemaHalls.txt");
+        cinemaHalls = his.readFromFile(file);
+        Repertoire rep = new Repertoire();
+        Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
+        rep.makingNewShowing(movie, 1, "16.30", cinemaHalls);
+        rep.makingNewShowing(movie, 1, "10.30", cinemaHalls);
+        rep.makingNewShowing(movie, 2, "10.10", cinemaHalls);
+        rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
+        rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
+        
+        */
     }
 }
