@@ -5,10 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class HallsInMemory implements ConnectWithMemory{
-        
     
     int number;
     int numberOfRows;
@@ -18,9 +18,13 @@ public class HallsInMemory implements ConnectWithMemory{
     String row;
     String time;
     
+    Day day = new Day();
+    Date date = day.getDate();
+    String sDate = day.dateToString(date);
+    
     @Override
     public void saveInFile(ArrayList cinemaHalls) {
-        File hallsInMemory = new File("cinemaHalls.txt");
+        File hallsInMemory = new File("cinemaHalls"+sDate+".txt");
         try {
             PrintWriter write = new PrintWriter(hallsInMemory);
             for (Object cinemaHall1 : cinemaHalls) {

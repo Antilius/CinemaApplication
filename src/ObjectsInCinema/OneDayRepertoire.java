@@ -27,11 +27,7 @@ public class OneDayRepertoire {
             for (int j=part-1; j<part+duration; j++){
             neededHall.getTimeEngaged()[j]=1;
             }
-            System.out.println("Seans pomyślnie dodany !");
         }
-        else{
-                    System.out.println("Nie możesz dodać takiego seansu !");
-                    }
         }else{
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
             if(neededHall.timeEngaged[j]!=0)
@@ -42,16 +38,13 @@ public class OneDayRepertoire {
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
             neededHall.timeEngaged[j]=1;
             }
-            System.out.println("Seans pomyślnie dodany !");
         }
-        else{
-                    System.out.println("Nie możesz dodać takiego seansu !");
-                    }
         }
         return showing;
         }
     
     public void addShowingToRepertoire(Showing showing){
+        if(showing.getHallNumber()!=0)
         repertoireForDay.add(showing);
     }
 

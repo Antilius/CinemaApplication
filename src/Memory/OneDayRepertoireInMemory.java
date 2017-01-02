@@ -7,15 +7,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class OneDayRepertoireInMemory implements ConnectWithMemory{
+    
+        Day day = new Day();
+        Date date = day.getDate();
+        String sDate = day.dateToString(date);
 
     @Override
     public void saveInFile(ArrayList repertoireForDay) {
-       File oneDayRep = new File("repertoireFor(data).txt");
+       File oneDayRep = new File("repertoireFor"+sDate+".txt");
         try {
             PrintWriter write = new PrintWriter(oneDayRep);
            for (Object showing1 : repertoireForDay) {
