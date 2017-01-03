@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class HallsInMemory implements ConnectWithMemory{
@@ -18,13 +17,9 @@ public class HallsInMemory implements ConnectWithMemory{
     String row;
     String time;
     
-    Day day = new Day();
-    Date date = day.getDate();
-    String sDate = day.dateToString(date);
-    
     @Override
     public void saveInFile(ArrayList cinemaHalls) {
-        File hallsInMemory = new File("cinemaHalls"+sDate+".txt");
+        File hallsInMemory = new File("cinemaHalls.txt");
         try {
             PrintWriter write = new PrintWriter(hallsInMemory);
             for (Object cinemaHall1 : cinemaHalls) {
@@ -73,22 +68,6 @@ public class HallsInMemory implements ConnectWithMemory{
                     row = row.substring(1);
                 }
             }
-            
-            
-            // wyswietlanie calej sali na ekran dla sprawdzenia
-            /*
-            System.out.println(number + "-" + numberOfRows + "-" +seatsInRow);
-            for(int i=0; i<timeEngaged.length; i++){
-                System.out.print(timeEngaged[i]);
-            }
-                System.out.println();
-            for(int k=0; k<numberOfRows; k++){
-                for(int l=0; l<seatsInRow; l++){
-                    System.out.print(places[k][l]);
-                }
-                System.out.println();
-            }
-            */
             
             CinemaHall cinemaHall = new CinemaHall(number, numberOfRows, seatsInRow, timeEngaged, places);
             cinemaHalls.add(cinemaHall);

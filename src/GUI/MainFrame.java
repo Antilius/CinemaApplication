@@ -10,6 +10,7 @@ import ObjectsInCinema.MovieType;
 import ObjectsInCinema.OneDayRepertoire;
 import ObjectsInCinema.Showing;
 import People.Person;
+import PersonalizedDates.DateFormatting;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -69,7 +70,7 @@ public class MainFrame extends JFrame{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
-        
+        /*
         Day day = new Day();
         Date date = day.getDate();
         String sDate = day.dateToString(date);
@@ -109,8 +110,7 @@ public class MainFrame extends JFrame{
         his.saveInFile(cinemaHalls);
         odrim.saveInFile(repertoireForDay);
 
+        */
         
-        
-                
     }
 }

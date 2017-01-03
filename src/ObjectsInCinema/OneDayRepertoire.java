@@ -29,7 +29,7 @@ public class OneDayRepertoire {
             }
         }
         }else{
-            for (int j=part-1; j<neededHall.timeEngaged.length; j++){
+            for (int j=part-1; j<neededHall.getTimeEngaged().length; j++){
             if(neededHall.timeEngaged[j]!=0)
                 possibleToAdd = false;
         }

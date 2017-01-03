@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PeopleInMemory implements ConnectWithMemory{
 
@@ -59,7 +57,21 @@ public class PeopleInMemory implements ConnectWithMemory{
             ex.getMessage();
         }
         return people;
-        
+    }
+    
+    public static boolean checkUser (String login, String password){
+        boolean correct = false;
+        PeopleInMemory pim = new PeopleInMemory();
+        ArrayList<Person> people = new ArrayList();
+        people = pim.readFromFile(new File("users.txt"));
+        for (Person person : people) {
+           if(person.getLogin().equals(login)){
+               if(person.getPassword().equals(password)){
+                   correct = true;
+               }
+           }
+        }
+        return correct;
     }
     
 }
