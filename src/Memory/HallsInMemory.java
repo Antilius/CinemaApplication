@@ -1,6 +1,7 @@
 package Memory;
 
 import ObjectsInCinema.CinemaHall;
+import PersonalizedDates.DateFormatting;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -18,8 +19,7 @@ public class HallsInMemory implements ConnectWithMemory{
     String time;
     
     @Override
-    public void saveInFile(ArrayList cinemaHalls) {
-        File hallsInMemory = new File("cinemaHalls.txt");
+    public void saveInFile(ArrayList cinemaHalls, File hallsInMemory) {
         try {
             PrintWriter write = new PrintWriter(hallsInMemory);
             for (Object cinemaHall1 : cinemaHalls) {
@@ -78,6 +78,31 @@ public class HallsInMemory implements ConnectWithMemory{
         return cinemaHalls;
     }
     
+    public void prepareHallsForNewDay(DateFormatting date){
+        String sDate = date.withoutHoursDateFormat();
+        File halls = new File("Halls "+sDate+".txt"); 
+        try {
+            PrintWriter write = new PrintWriter(halls);
+            for(int i=1; i<=5; i++){
+            write.println(i);
+            write.println(15);
+            write.println(20);
+            for(int j=0; j<144; j++){
+                write.print(0);
+            }
+            write.println();
+            for(int k=0; k<15; k++){
+                for(int l=0; l<20; l++){
+                    write.print(0);
+                }
+                write.println();
+            }
+            }
+            write.close();
+        } catch (FileNotFoundException ex) {
+            ex.getMessage();
+        }
+    }
     
     
     

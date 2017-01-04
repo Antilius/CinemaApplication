@@ -12,8 +12,7 @@ import java.util.Scanner;
 public class OneDayRepertoireInMemory implements ConnectWithMemory{
     
     @Override
-    public void saveInFile(ArrayList repertoireForDay) {
-       File oneDayRep = new File("repertoireFor.txt");
+    public void saveInFile(ArrayList repertoireForDay, File oneDayRep) {
         try {
             PrintWriter write = new PrintWriter(oneDayRep);
            for (Object showing1 : repertoireForDay) {

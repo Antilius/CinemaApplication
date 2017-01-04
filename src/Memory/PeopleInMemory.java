@@ -10,8 +10,7 @@ import java.util.Scanner;
 public class PeopleInMemory implements ConnectWithMemory{
 
     @Override
-    public void saveInFile(ArrayList users) {
-        File usersInMemory = new File("users.txt");
+    public void saveInFile(ArrayList users,File usersInMemory) {
         try {
             PrintWriter write = new PrintWriter(usersInMemory);
             for (Object user1 : users) {

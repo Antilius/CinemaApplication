@@ -1,6 +1,5 @@
 package GUI;
 
-import Memory.Day;
 import Memory.HallsInMemory;
 import Memory.OneDayRepertoireInMemory;
 import Memory.PeopleInMemory;
@@ -15,7 +14,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -70,20 +68,22 @@ public class MainFrame extends JFrame{
                 System.err.println(ex.getClass().toString()+" while opening properties file");
             }
         }
-        /*
-        Day day = new Day();
-        Date date = day.getDate();
-        String sDate = day.dateToString(date);
+        
+        
+        
+        DateFormatting date = new DateFormatting();
+        HallsInMemory his = new HallsInMemory();
+        his.prepareHallsForNewDay(date);
         
         PeopleInMemory pim = new PeopleInMemory();
         OneDayRepertoireInMemory odrim = new OneDayRepertoireInMemory();
-        HallsInMemory his = new HallsInMemory();
         Showing showing = new Showing();
         OneDayRepertoire rep = new OneDayRepertoire();
         Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
         
-        File halls = new File("cinemaHalls"+sDate+".txt");
         File people = new File("users.txt");
+        File repFile = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
+        File halls = new File("Halls "+date.withoutHoursDateFormat()+".txt");
         
         ArrayList<Person> users = new ArrayList();
         ArrayList<CinemaHall> cinemaHalls = new ArrayList();
@@ -104,13 +104,15 @@ public class MainFrame extends JFrame{
         rep.addShowingToRepertoire(showing);
         showing = rep.makingNewShowing(movie, 3, "23.10", cinemaHalls);
         rep.addShowingToRepertoire(showing);
+        showing = rep.makingNewShowing(movie, 4, "10.10", cinemaHalls);
+        rep.addShowingToRepertoire(showing);
         
         repertoireForDay = rep.getRepertoireForDay();
         
-        his.saveInFile(cinemaHalls);
-        odrim.saveInFile(repertoireForDay);
+        his.saveInFile(cinemaHalls, halls);
+        odrim.saveInFile(repertoireForDay, repFile);
 
-        */
+        
         
     }
 }
