@@ -7,8 +7,6 @@ public class Showing {
     private int hallNumber;
     private String hour;
     
-    public Showing(){}
-        
     public Showing(Movie movie, int hallNumber, String hour) {
         this.movie = movie;
         this.hallNumber = hallNumber;

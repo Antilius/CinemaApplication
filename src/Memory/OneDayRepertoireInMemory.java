@@ -2,17 +2,20 @@ package Memory;
 
 import ObjectsInCinema.Movie;
 import ObjectsInCinema.MovieType;
+import ObjectsInCinema.OneDayRepertoire;
 import ObjectsInCinema.Showing;
+import PersonalizedDates.DateFormatting;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class OneDayRepertoireInMemory implements ConnectWithMemory{
+public class OneDayRepertoireInMemory{
     
-    @Override
-    public void saveInFile(ArrayList repertoireForDay, File oneDayRep) {
+    public static void save(OneDayRepertoire oneDayRepertoire, DateFormatting date) {
+        File oneDayRep = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
+        ArrayList<Showing> repertoireForDay = oneDayRepertoire.getRepertoireForDay();
         try {
             PrintWriter write = new PrintWriter(oneDayRep);
            for (Object showing1 : repertoireForDay) {
@@ -31,36 +34,28 @@ public class OneDayRepertoireInMemory implements ConnectWithMemory{
         }
     }
 
-    @Override
-    public ArrayList readFromFile(File oneDayRep) {
+    public static OneDayRepertoire load(DateFormatting date) {
+        File oneDayRep = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
         ArrayList<Showing> repertoireForDay = new ArrayList();
-        String title;
-        String director;
-        MovieType type;
-        int age;
-        int duration;
-        int hallNumber;
-        String hour;
-        
         try {
             Scanner reader = new Scanner(oneDayRep);
             while(reader.hasNextLine()){
-                title = reader.nextLine();
-                director = reader.nextLine();
-                type = MovieType.valueOf(reader.nextLine());
-                age = Integer.valueOf(reader.nextLine());
-                duration = Integer.valueOf(reader.nextLine());
+                String title = reader.nextLine();
+                String director = reader.nextLine();
+                MovieType type = MovieType.valueOf(reader.nextLine());
+                int age = Integer.valueOf(reader.nextLine());
+                int duration = Integer.valueOf(reader.nextLine());
                 Movie movie = new Movie(title, director, type, age, duration);
-                hallNumber = Integer.valueOf(reader.nextLine());
-                hour = reader.nextLine();
+                int hallNumber = Integer.valueOf(reader.nextLine());
+                String hour = reader.nextLine();
                 Showing showing = new Showing(movie, hallNumber, hour);
                 repertoireForDay.add(showing);
             }
         } catch (FileNotFoundException ex) {
             ex.getMessage();
         }
-        
-        return repertoireForDay;
+        OneDayRepertoire oneDayRepertoire = new OneDayRepertoire(repertoireForDay);
+        return oneDayRepertoire;
     }
     
 }

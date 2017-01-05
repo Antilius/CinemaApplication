@@ -4,17 +4,17 @@ import People.Person;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class PeopleInMemory implements ConnectWithMemory{
+public class PeopleInMemory {
 
-    @Override
-    public void saveInFile(ArrayList users,File usersInMemory) {
+    public static void save(HashMap users) {
+        File usersInMemory = new File("users.txt");
         try {
             PrintWriter write = new PrintWriter(usersInMemory);
-            for (Object user1 : users) {
-               Person user = (Person) user1;
+            while(!users.isEmpty()){
+               Person user = (Person) users.remove(users.size());
                write.println(user.getName());
                write.println(user.getSurname());
                write.println(user.getPhoneNumber());
@@ -29,28 +29,21 @@ public class PeopleInMemory implements ConnectWithMemory{
         }
     }
 
-    @Override
-    public ArrayList readFromFile(File users) {
-        ArrayList<Person> people = new ArrayList();
-        String name;
-        String surname;
-        int phoneNumber;
-        String email;
-        String login;
-        String password;
-        boolean canChange;
+    public static HashMap load() {
+        File users = new File("users.txt");
+        HashMap<String, Person>  people = new HashMap();
         try {
             Scanner reader = new Scanner(users);
             while(reader.hasNextLine()){
-                name = reader.nextLine();
-                surname = reader.nextLine();
-                phoneNumber = Integer.valueOf(reader.nextLine());
-                email = reader.nextLine();
-                login = reader.nextLine();
-                password = reader.nextLine();
-                canChange = Boolean.getBoolean(reader.nextLine());
+                String name = reader.nextLine();
+                String surname = reader.nextLine();
+                int phoneNumber = Integer.valueOf(reader.nextLine());
+                String email = reader.nextLine();
+                String login = reader.nextLine();
+                String password = reader.nextLine();
+                boolean canChange = Boolean.getBoolean(reader.nextLine());
                 Person person = new Person(name, surname, phoneNumber, email, login, password, canChange);
-                people.add(person);
+                people.put(login, person);
             }
         } catch (FileNotFoundException ex) {
             ex.getMessage();
@@ -58,19 +51,6 @@ public class PeopleInMemory implements ConnectWithMemory{
         return people;
     }
     
-    public static boolean checkUser (String login, String password){
-        boolean correct = false;
-        PeopleInMemory pim = new PeopleInMemory();
-        ArrayList<Person> people = new ArrayList();
-        people = pim.readFromFile(new File("users.txt"));
-        for (Person person : people) {
-           if(person.getLogin().equals(login)){
-               if(person.getPassword().equals(password)){
-                   correct = true;
-               }
-           }
-        }
-        return correct;
-    }
+    
     
 }

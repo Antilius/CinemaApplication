@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -70,7 +71,7 @@ public class MainFrame extends JFrame{
         }
         
         
-        
+        /*
         DateFormatting date = new DateFormatting();
         HallsInMemory his = new HallsInMemory();
         his.prepareHallsForNewDay(date);
@@ -92,27 +93,29 @@ public class MainFrame extends JFrame{
         users = pim.readFromFile(people);
         cinemaHalls = his.readFromFile(halls);
         
-        showing = rep.makingNewShowing(movie, 1, "16.30", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 1, "10.30", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 2, "10.10", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 3, "10.10", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 3, "23.10", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
-        showing = rep.makingNewShowing(movie, 4, "10.10", cinemaHalls);
-        rep.addShowingToRepertoire(showing);
+        showing = new Showing(movie, 2, "16.30");
+        rep.addShowingToRepertoire(showing, cinemaHalls);
+        showing = new Showing(movie, 1, "16.30");
+        rep.addShowingToRepertoire(showing, cinemaHalls);
+        showing = new Showing(movie, 2, "16.30");
+        rep.addShowingToRepertoire(showing, cinemaHalls);
+        showing = new Showing(movie, 3, "16.30");
+        rep.addShowingToRepertoire(showing, cinemaHalls);
         
         repertoireForDay = rep.getRepertoireForDay();
         
         his.saveInFile(cinemaHalls, halls);
         odrim.saveInFile(repertoireForDay, repFile);
 
-        
-        
+        */
+        DateFormatting date = new DateFormatting();
+        HallsInMemory.prepareHallsForNewDay(date);
+        HashMap halls = HallsInMemory.load(date);
+        OneDayRepertoire oneDayRep = new OneDayRepertoire();
+        Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
+        Showing showing = new Showing(movie, 2, "16.30");
+        oneDayRep.addShowingToRepertoire(showing, halls);
+        HallsInMemory.save(halls, date);
+        OneDayRepertoireInMemory.save(oneDayRep, date);
     }
 }

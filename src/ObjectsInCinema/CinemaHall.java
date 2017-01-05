@@ -8,8 +8,6 @@ public class CinemaHall {
     public int[] timeEngaged;
     public int[][] places;
     
-    public CinemaHall(){}
-    
     public CinemaHall(int number, int numberOfRows, int seatsInRow, int[] timeEngaged, int[][] places) {
         this.number = number;
         this.numberOfRows = numberOfRows;

@@ -1,5 +1,10 @@
 package People;
 
+import Memory.PeopleInMemory;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Person {
     private String name;
     private String surname;
@@ -47,5 +52,17 @@ public class Person {
         return canChange;
     }
     
-    
+    public static boolean checkPerson (String login, String password){
+        boolean correct = false;
+        HashMap<String, Person> people = new HashMap();
+        people = PeopleInMemory.load();
+        for (int i=0; i<people.size(); i++) {
+           if(people.get(i).getLogin().equals(login)){
+               if(people.get(i).getPassword().equals(password)){
+                   correct = true;
+               }
+           }
+        }
+        return correct;
+    }
 }

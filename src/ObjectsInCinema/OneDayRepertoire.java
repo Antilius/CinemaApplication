@@ -1,29 +1,35 @@
 package ObjectsInCinema;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OneDayRepertoire {
     
-    ArrayList<Showing> repertoireForDay = new ArrayList();
+    private ArrayList<Showing> repertoireForDay = new ArrayList();
+
+    public OneDayRepertoire(ArrayList repertoireForDay) {
+        this.repertoireForDay = repertoireForDay;
+    }
+    
+    public OneDayRepertoire(){};
    
-    public Showing makingNewShowing (Movie movie, int hallNumber, String hour, ArrayList cinemaHalls){
-        Showing showing = new Showing();
-        CinemaHall neededHall = new CinemaHall();
+    public void addShowingToRepertoire(Showing showing, HashMap cinemaHalls){
         boolean possibleToAdd = true;
-        for (Object cinemaHall : cinemaHalls) {
-                CinemaHall cH = (CinemaHall) cinemaHall;
-                if(cH.getNumber() == hallNumber)
+        CinemaHall neededHall = null;
+        for (int i=1; i<=cinemaHalls.size(); i++) {
+                CinemaHall cH = (CinemaHall) cinemaHalls.get(i);
+                if(cH.getNumber() == showing.getHallNumber())
                    neededHall = cH;
         }
-        int part = Showing.hoursToPartsOFTime(hour);
-        int duration = movie.getDuration()/10;
-        if(part+duration<=neededHall.getTimeEngaged().length){
+        int part = Showing.hoursToPartsOFTime(showing.getHour());
+        int duration = showing.getMovie().getDuration()/10;
+        if(part+duration <= neededHall.getTimeEngaged().length){
         for (int j=part-1; j<part+duration; j++){
             if(neededHall.getTimeEngaged()[j]==1)
                 possibleToAdd = false;
         }
         if(possibleToAdd == true){
-            showing = new Showing(movie, hallNumber, hour);
+            repertoireForDay.add(showing);
             for (int j=part-1; j<part+duration; j++){
             neededHall.getTimeEngaged()[j]=1;
             }
@@ -34,18 +40,12 @@ public class OneDayRepertoire {
                 possibleToAdd = false;
         }
         if(possibleToAdd == true){
-            showing = new Showing(movie, hallNumber, hour);
+            repertoireForDay.add(showing);
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
             neededHall.timeEngaged[j]=1;
             }
         }
         }
-        return showing;
-        }
-    
-    public void addShowingToRepertoire(Showing showing){
-        if(showing.getHallNumber()!=0)
-        repertoireForDay.add(showing);
     }
 
     public ArrayList<Showing> getRepertoireForDay() {
