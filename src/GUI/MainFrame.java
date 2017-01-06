@@ -1,19 +1,19 @@
 package GUI;
 
-import Memory.HallsInMemory;
+import Memory.HallsForDayInMemory;
 import Memory.OneDayRepertoireInMemory;
 import Memory.PeopleInMemory;
-import ObjectsInCinema.CinemaHall;
+import ObjectsInCinema.Booking;
 import ObjectsInCinema.Movie;
 import ObjectsInCinema.MovieType;
 import ObjectsInCinema.OneDayRepertoire;
+import ObjectsInCinema.BookedPlace;
 import ObjectsInCinema.Showing;
 import People.Person;
 import PersonalizedDates.DateFormatting;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -70,52 +70,24 @@ public class MainFrame extends JFrame{
             }
         }
         
-        
-        /*
         DateFormatting date = new DateFormatting();
-        HallsInMemory his = new HallsInMemory();
-        his.prepareHallsForNewDay(date);
-        
-        PeopleInMemory pim = new PeopleInMemory();
-        OneDayRepertoireInMemory odrim = new OneDayRepertoireInMemory();
-        Showing showing = new Showing();
-        OneDayRepertoire rep = new OneDayRepertoire();
+        HallsForDayInMemory.prepareHallsForNewDay(date);
+        HashMap users = PeopleInMemory.load();
+        HashMap halls = HallsForDayInMemory.load(date);
+        OneDayRepertoire oneDayRep = new OneDayRepertoire(date);
         Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
+        Showing showing1 = new Showing(movie, 2, "01.30");
+        oneDayRep.addShowingToRepertoire(showing1, halls);
+        Showing showing2 = new Showing(movie, 1, "10.30");
+        oneDayRep.addShowingToRepertoire(showing2, halls);
+        Showing showing3 = new Showing(movie, 5, "19.30");
+        oneDayRep.addShowingToRepertoire(showing3, halls);
         
-        File people = new File("users.txt");
-        File repFile = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
-        File halls = new File("Halls "+date.withoutHoursDateFormat()+".txt");
+        BookedPlace place = new BookedPlace(15,20);
+        Booking booking = new Booking(date, (Person)users.get("jan"), showing3, place);
+        booking.acceptingBooking(booking);
         
-        ArrayList<Person> users = new ArrayList();
-        ArrayList<CinemaHall> cinemaHalls = new ArrayList();
-        ArrayList<Showing> repertoireForDay = new ArrayList();
-        
-        users = pim.readFromFile(people);
-        cinemaHalls = his.readFromFile(halls);
-        
-        showing = new Showing(movie, 2, "16.30");
-        rep.addShowingToRepertoire(showing, cinemaHalls);
-        showing = new Showing(movie, 1, "16.30");
-        rep.addShowingToRepertoire(showing, cinemaHalls);
-        showing = new Showing(movie, 2, "16.30");
-        rep.addShowingToRepertoire(showing, cinemaHalls);
-        showing = new Showing(movie, 3, "16.30");
-        rep.addShowingToRepertoire(showing, cinemaHalls);
-        
-        repertoireForDay = rep.getRepertoireForDay();
-        
-        his.saveInFile(cinemaHalls, halls);
-        odrim.saveInFile(repertoireForDay, repFile);
-
-        */
-        DateFormatting date = new DateFormatting();
-        HallsInMemory.prepareHallsForNewDay(date);
-        HashMap halls = HallsInMemory.load(date);
-        OneDayRepertoire oneDayRep = new OneDayRepertoire();
-        Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
-        Showing showing = new Showing(movie, 2, "16.30");
-        oneDayRep.addShowingToRepertoire(showing, halls);
-        HallsInMemory.save(halls, date);
+        HallsForDayInMemory.save(halls, date);
         OneDayRepertoireInMemory.save(oneDayRep, date);
     }
 }

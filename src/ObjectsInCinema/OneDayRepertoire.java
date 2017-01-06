@@ -1,17 +1,18 @@
 package ObjectsInCinema;
 
+import Memory.ViewOfHallInMemory;
+import PersonalizedDates.DateFormatting;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OneDayRepertoire {
     
     private ArrayList<Showing> repertoireForDay = new ArrayList();
-
-    public OneDayRepertoire(ArrayList repertoireForDay) {
-        this.repertoireForDay = repertoireForDay;
-    }
+    private String date;
     
-    public OneDayRepertoire(){};
+    public OneDayRepertoire(DateFormatting date){
+    this.date = date.withoutHoursDateFormat();
+    };
    
     public void addShowingToRepertoire(Showing showing, HashMap cinemaHalls){
         boolean possibleToAdd = true;
@@ -33,6 +34,8 @@ public class OneDayRepertoire {
             for (int j=part-1; j<part+duration; j++){
             neededHall.getTimeEngaged()[j]=1;
             }
+            String nazwa = "ViewsOfHalls/Hall "+showing.getHallNumber()+" for "+this.date+" "+showing.getHour()+".txt";
+            ViewOfHallInMemory.save(new ViewOfHall(15,20), nazwa);
         }
         }else{
             for (int j=part-1; j<neededHall.getTimeEngaged().length; j++){
@@ -44,11 +47,17 @@ public class OneDayRepertoire {
             for (int j=part-1; j<neededHall.timeEngaged.length; j++){
             neededHall.timeEngaged[j]=1;
             }
+            String nazwa = "ViewsOfHalls/Hall "+showing.getHallNumber()+" for "+this.date+" "+showing.getHour()+".txt";
+            ViewOfHallInMemory.save(new ViewOfHall(15,20), nazwa);
         }
         }
     }
 
     public ArrayList<Showing> getRepertoireForDay() {
         return repertoireForDay;
+    }
+
+    public void setRepertoireForDay(ArrayList<Showing> repertoireForDay) {
+        this.repertoireForDay = repertoireForDay;
     }
 }

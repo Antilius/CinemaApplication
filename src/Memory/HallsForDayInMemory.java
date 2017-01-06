@@ -5,18 +5,19 @@ import PersonalizedDates.DateFormatting;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
-public class HallsInMemory{
+public class HallsForDayInMemory{
     
     public static void save(HashMap cinemaHalls, DateFormatting date) {
-        File hallsInMemory = new File ("Halls "+date.withoutHoursDateFormat()+".txt");
+        File hallsInMemory = new File ("Halls/Halls "+date.withoutHoursDateFormat()+".txt");
+        Set keys = cinemaHalls.keySet();
         try {
             PrintWriter write = new PrintWriter(hallsInMemory);
-            for (int i=1; i<=cinemaHalls.size(); i++) {
-               CinemaHall cinemaHall = (CinemaHall) cinemaHalls.get(i);
+            for (Object key: keys) {
+               CinemaHall cinemaHall = (CinemaHall) cinemaHalls.get(key);
                write.println(cinemaHall.getNumber());
                write.println(cinemaHall.getNumberOfRows());
                write.println(cinemaHall.getSeatsInRow());
@@ -24,12 +25,6 @@ public class HallsInMemory{
                    write.print(cinemaHall.getTimeEngaged()[j]);
                }
                write.println();
-               for(int k=0; k<cinemaHall.getNumberOfRows(); k++){
-                   for(int j=0; j<cinemaHall.getSeatsInRow(); j++){
-                       write.print(cinemaHall.getPlaces()[k][j]);
-                   }
-                   write.println();
-               }
             }
             write.close();
         } catch (FileNotFoundException ex) {
@@ -38,7 +33,7 @@ public class HallsInMemory{
     }
 
     public static HashMap load(DateFormatting date){
-        File hallsInMemory = new File ("Halls "+date.withoutHoursDateFormat()+".txt");
+        File hallsInMemory = new File ("Halls/Halls "+date.withoutHoursDateFormat()+".txt");
         HashMap<Integer, CinemaHall> cinemaHalls = new HashMap();
         try {
             Scanner reader = new Scanner(hallsInMemory);
@@ -52,17 +47,7 @@ public class HallsInMemory{
                 timeEngaged[i] = Integer.valueOf(time.substring(0,1));
                 time = time.substring(1);
             }
-            int [][] places = new int [numberOfRows][seatsInRow];
-            
-            for(int k=0; k<numberOfRows; k++){
-                String row = reader.nextLine();
-                for(int l=0; l<seatsInRow; l++){
-                    places[k][l] = Integer.valueOf(row.substring(0,1));
-                    row = row.substring(1);
-                }
-            }
-            
-            CinemaHall cinemaHall = new CinemaHall(number, numberOfRows, seatsInRow, timeEngaged, places);
+            CinemaHall cinemaHall = new CinemaHall(number, numberOfRows, seatsInRow, timeEngaged);
             cinemaHalls.put(number, cinemaHall);
             }
             } catch (FileNotFoundException ex) {
@@ -72,7 +57,7 @@ public class HallsInMemory{
     }
     
     public static void prepareHallsForNewDay(DateFormatting date){
-        File halls = new File("Halls "+date.withoutHoursDateFormat()+".txt"); 
+        File halls = new File("Halls/Halls "+date.withoutHoursDateFormat()+".txt"); 
         try {
             PrintWriter write = new PrintWriter(halls);
             for(int i=1; i<=5; i++){
@@ -83,12 +68,6 @@ public class HallsInMemory{
                 write.print(0);
             }
             write.println();
-            for(int k=0; k<15; k++){
-                for(int l=0; l<20; l++){
-                    write.print(0);
-                }
-                write.println();
-            }
             }
             write.close();
         } catch (FileNotFoundException ex) {

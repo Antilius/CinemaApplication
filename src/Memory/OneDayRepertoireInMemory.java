@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class OneDayRepertoireInMemory{
     
     public static void save(OneDayRepertoire oneDayRepertoire, DateFormatting date) {
-        File oneDayRep = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
+        File oneDayRep = new File("Repertoires/repertoireFor "+date.withoutHoursDateFormat()+".txt");
         ArrayList<Showing> repertoireForDay = oneDayRepertoire.getRepertoireForDay();
         try {
             PrintWriter write = new PrintWriter(oneDayRep);
@@ -35,7 +35,7 @@ public class OneDayRepertoireInMemory{
     }
 
     public static OneDayRepertoire load(DateFormatting date) {
-        File oneDayRep = new File("repertoireFor "+date.withoutHoursDateFormat()+".txt");
+        File oneDayRep = new File("Repertoires/repertoireFor "+date.withoutHoursDateFormat()+".txt");
         ArrayList<Showing> repertoireForDay = new ArrayList();
         try {
             Scanner reader = new Scanner(oneDayRep);
@@ -54,7 +54,8 @@ public class OneDayRepertoireInMemory{
         } catch (FileNotFoundException ex) {
             ex.getMessage();
         }
-        OneDayRepertoire oneDayRepertoire = new OneDayRepertoire(repertoireForDay);
+        OneDayRepertoire oneDayRepertoire = new OneDayRepertoire(date);
+        oneDayRepertoire.setRepertoireForDay(repertoireForDay);
         return oneDayRepertoire;
     }
     

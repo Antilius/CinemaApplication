@@ -6,14 +6,12 @@ public class CinemaHall {
     private int numberOfRows;
     private int seatsInRow;
     public int[] timeEngaged;
-    public int[][] places;
     
-    public CinemaHall(int number, int numberOfRows, int seatsInRow, int[] timeEngaged, int[][] places) {
+    public CinemaHall(int number, int numberOfRows, int seatsInRow, int[] timeEngaged) {
         this.number = number;
         this.numberOfRows = numberOfRows;
         this.seatsInRow = seatsInRow;
         this.timeEngaged = timeEngaged;
-        this.places = places;
     }
 
     public int getNumber() {
@@ -31,13 +29,4 @@ public class CinemaHall {
     public int[] getTimeEngaged() {
         return timeEngaged;
     }
-
-    public int[][] getPlaces() {
-        return places;
-    }
-    
-    
-    
-    
-    
 }
