@@ -1,9 +1,8 @@
 package People;
 
 import Memory.PeopleInMemory;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Person {
     private String name;
@@ -56,9 +55,10 @@ public class Person {
         boolean correct = false;
         HashMap<String, Person> people = new HashMap();
         people = PeopleInMemory.load();
-        for (int i=0; i<people.size(); i++) {
-           if(people.get(i).getLogin().equals(login)){
-               if(people.get(i).getPassword().equals(password)){
+        Set keys = people.keySet();
+        for(Object key: keys){
+           if(people.get(key).getLogin().equals(login)){
+               if(people.get(key).getPassword().equals(password)){
                    correct = true;
                }
            }
