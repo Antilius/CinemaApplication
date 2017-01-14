@@ -28,7 +28,7 @@ public class MainFrame extends JFrame{
         this.setSize(new Dimension(width, height));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(300,200); 
-        this.setResizable(true);
+        this.setResizable(false);
         //adding components       
         JPanel GUIwhenAppOpened = new MainPanel(width, height);
         this.add(GUIwhenAppOpened); 
@@ -75,19 +75,20 @@ public class MainFrame extends JFrame{
         HashMap users = PeopleInMemory.load();
         HashMap halls = HallsForDayInMemory.load(date);
         OneDayRepertoire oneDayRep = new OneDayRepertoire(date);
-        Movie movie = new Movie("Title","Director",MovieType.ACTION,16,300);
+        Movie movie = new Movie("Kubuś Puchatek i przyjaciele","Director",MovieType.ACTION,16,234);
         Showing showing1 = new Showing(movie, 2, "01.30");
         oneDayRep.addShowingToRepertoire(showing1, halls);
-        Showing showing2 = new Showing(movie, 1, "10.30");
+        Movie movie1 = new Movie("Kaczor Donald i wesołe przygody","Director",MovieType.ACTION,16,123);
+        Showing showing2 = new Showing(movie1, 1, "10.30");
         oneDayRep.addShowingToRepertoire(showing2, halls);
-        Showing showing3 = new Showing(movie, 5, "19.30");
-        oneDayRep.addShowingToRepertoire(showing3, halls);
+        //Showing showing3 = new Showing(movie, 5, "19.30");
+        //oneDayRep.addShowingToRepertoire(showing3, halls);
         
         BookedPlace place = new BookedPlace(15,20);
-        Booking booking = new Booking(date, (Person)users.get("jan"), showing3, place);
+        Booking booking = new Booking(date, (Person)users.get("jan"), showing1, place);
         booking.acceptingBooking(booking);
         
         HallsForDayInMemory.save(halls, date);
         OneDayRepertoireInMemory.save(oneDayRep, date);
-    }
+    }  
 }

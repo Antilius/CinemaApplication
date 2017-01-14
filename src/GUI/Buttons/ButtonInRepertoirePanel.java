@@ -27,6 +27,7 @@ public class ButtonInRepertoirePanel extends ButtonChangingTextColor implements 
     public void actionPerformed(ActionEvent event){
         ((JButton)event.getSource()).addMouseListener(this);
     }
+    
     @Override
     public void mouseClicked(MouseEvent event) {
         

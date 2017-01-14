@@ -2,15 +2,16 @@ package GUI;
 
 import GUI.TextPainters.MultiLineTextPainter;
 import GUI.TextPainters.TextPainter;
+import Memory.OneDayRepertoireInMemory;
 import ObjectsInCinema.Movie;
-import ObjectsInCinema.MovieType;
+import ObjectsInCinema.Showing;
 import PersonalizedDates.DateFormatting;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public class RepertoirePreview extends JPanel{
@@ -20,41 +21,52 @@ public class RepertoirePreview extends JPanel{
     
     private int height;
     
-    public RepertoirePreview(LinkedList<Movie> movie_list) {
+    public RepertoirePreview(DateFormatting date) {
         super();
-        this.height=0;
-        printThis(movie_list);
+        this.height=150;
+        printThis(date);
     }
 
-    private void printThis(LinkedList<Movie> movie_list) {     
+    public static int getTotalHeight(DateFormatting date){
+        int time_width = 15+TextPainter.lengthOfStringWithSpecifiedFontInPixels("12:12", new Font("Times Roman",Font.BOLD,12));
+        int generalHeight = time_width;
+        ArrayList<Showing> showings = OneDayRepertoireInMemory.load(date).getRepertoireForDay();
+        for(Showing s:showings){
+            Movie m = s.getMovie();
+            MultiLineTextPainter movie = RepertoirePreview.filmLengthVisualize(m, true);
+            Dimension movie_size = movie.getPreferredSize();
+            generalHeight+=movie_size.height;
+        }
+        return generalHeight;
+    }
+    
+    private void printThis(DateFormatting date) {     
         //setting properties
+        int time_width = 15+TextPainter.lengthOfStringWithSpecifiedFontInPixels("12:12", new Font("Times Roman",Font.BOLD,12));
+        int generalHeight = time_width;
         this.setLayout(null);
         //adding components
-        MultiLineTextPainter film1 = RepertoirePreview.filmLengthVisualize(new Movie("Kubuś Puchatek i przyjaciele","",MovieType.ACTION,1990,134),true);
-        this.add(film1);
-        MultiLineTextPainter film2 = RepertoirePreview.filmLengthVisualize(new Movie("Killerów dwóch","",MovieType.ACTION,1990,231),false);
-        this.add(film2);
-        //setting layout
-        Dimension film1_size = film1.getPreferredSize();
-        Dimension film2_size = film2.getPreferredSize(); 
-        //tymczasowo - do poprawy
-        int time_width = 10+TextPainter.lengthOfStringWithSpecifiedFontInPixels("23:12", new Font("Times Roman",Font.BOLD,12));
-        this.setHeight(film1_size.height+film2_size.height+time_width);
-        //
-        
-        film1.setBounds(HOUR_BOX_WIDTH*13+9, time_width, film1_size.width, film1_size.height);
-        film2.setBounds(HOUR_BOX_WIDTH*10+15, time_width+film1_size.height, film2_size.width, film2_size.height);
-        
-        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,this.getHeight()));
+        ArrayList<Showing> showings = OneDayRepertoireInMemory.load(date).getRepertoireForDay();
+        for(Showing s:showings){
+            Movie m = s.getMovie();
+            MultiLineTextPainter movie = RepertoirePreview.filmLengthVisualize(m, true);
+            this.add(movie);
+            Dimension movie_size = movie.getPreferredSize();
+            int startX = HOUR_BOX_WIDTH*(1+Showing.hourStart(s.getHour()))+getWidthOfMinuteBox(Showing.minuteStart(s.getHour()));
+            movie.setBounds(startX, generalHeight, movie_size.width, movie_size.height);
+            generalHeight+=movie_size.height;
+            this.setHeight(generalHeight);
+        }
+        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,getTotalHeight(date)));
     }
     
     public static MultiLineTextPainter filmLengthVisualize(Movie m,boolean possible){
         int label_time_boxes = getWidthOfMinuteBox(m.getDuration());
         if(possible){
-            return new MultiLineTextPainter(m.getTitle(),new Font("Times Roman",Font.PLAIN,12),Color.BLUE,Color.GREEN,label_time_boxes);
+            return new MultiLineTextPainter(m.getTitle(),new Font("Times Roman",Font.BOLD,12),Color.BLUE,Color.GREEN,label_time_boxes);
         }
         else{
-            return new MultiLineTextPainter(m.getTitle(),new Font("Times Roman",Font.PLAIN,12),Color.BLUE,Color.RED,label_time_boxes);
+            return new MultiLineTextPainter(m.getTitle(),new Font("Times Roman",Font.BOLD,12),Color.BLUE,Color.RED,label_time_boxes);
         }
     } 
     

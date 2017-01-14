@@ -1,7 +1,7 @@
 package GUI;
 
 import GUI.Buttons.ButtonChangingTextColor;
-import GUI.Buttons.ButtonGettingUserName;
+import GUI.Buttons.ButtonGettingUser;
 import PersonalizedDates.DateFormatting;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -51,7 +51,7 @@ public final class MainPanel extends JPanel{
         this.add(loginField);
         JPasswordField passwordField = new JPasswordField(25);
         this.add(passwordField);
-        JButton logIn = new ButtonGettingUserName("Login",this,loginField,width,height);
+        JButton logIn = new ButtonGettingUser("Login",this,loginField,passwordField,width,height);
         this.add(logIn);
         
         //setting layout
@@ -96,7 +96,7 @@ public final class MainPanel extends JPanel{
         rep.setBounds((width-rep_size.width)/2, 200, rep_size.width, rep_size.height);
     }
     
-    public void paintProfile(int width,int height){
+    public void printProfile(int width,int height){
         //setting properties
         this.setLayout(null);
         this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło   
