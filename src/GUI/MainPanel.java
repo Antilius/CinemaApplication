@@ -99,11 +99,51 @@ public final class MainPanel extends JPanel{
     public void printProfile(int width,int height){
         //setting properties
         this.setLayout(null);
-        this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło   
+        this.setBackground(Color.BLACK);  
         this.setPreferredSize(new Dimension(width,height));
         this.setVisible(true);
         //adding components
+        JLabel text1 = new JLabel("Twój profil:");
+        text1.setFont(new Font("Times Roman",Font.BOLD,20));
+        text1.setForeground(Color.ORANGE);
+        this.add(text1);
+        JLabel photo = new JLabel("PHOTO", SwingConstants.CENTER);
+            photo.setPreferredSize(new Dimension(200,200));
+            photo.setFont(new Font("Times Roman",Font.PLAIN,40));
+            photo.setForeground(Color.BLACK);
+            photo.setOpaque(true);
+            photo.setBackground(Color.WHITE);
+        this.add(photo);
+        JLabel text2 = new JLabel("Rezerwacje: ");
+        text2.setFont(new Font("Times Roman",Font.BOLD,20));
+        text2.setForeground(Color.ORANGE);
+        this.add(text2);
+        JLabel text3 = new JLabel("Imie i nazwisko");
+        text3.setFont(new Font("Times Roman",Font.BOLD,20));
+        text3.setForeground(Color.ORANGE);
+        this.add(text3);
+        JLabel text4 = new JLabel("Email");
+        text4.setFont(new Font("Times Roman",Font.BOLD,20));
+        text4.setForeground(Color.ORANGE);
+        this.add(text4);
+        JLabel text5 = new JLabel("Rodzaj konta");
+        text5.setFont(new Font("Times Roman",Font.BOLD,20));
+        text5.setForeground(Color.ORANGE);
+        this.add(text5);
         //setting layout
+        Dimension text1_size = text1.getPreferredSize();
+        Dimension photo_size = photo.getPreferredSize();
+        Dimension text2_size = text2.getPreferredSize();
+        Dimension text3_size = text3.getPreferredSize();
+        Dimension text4_size = text4.getPreferredSize();
+        Dimension text5_size = text5.getPreferredSize();
+        
+        text1.setBounds(10, 10,text1_size.width, text1_size.height);
+        text2.setBounds(10, 300,text2_size.width, text2_size.height);
+        text3.setBounds(220, 60,text3_size.width, text3_size.height);
+        text4.setBounds(220, 90,text4_size.width, text4_size.height);
+        text5.setBounds(220, 120,text5_size.width, text5_size.height);
+        photo.setBounds(10, 60, photo_size.width, photo_size.height);
     }
     
     private JPanel prepareUserPanel(String user){

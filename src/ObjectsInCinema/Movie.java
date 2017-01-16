@@ -8,8 +8,6 @@ public class Movie {
     private int age;
     private int duration; // zakladamy ze czas trwania jest podany w minutach
     
-    public Movie(){}
-
     public Movie(String title, String director, MovieType type, int age, int duration) {
         this.title = title;
         this.director = director;

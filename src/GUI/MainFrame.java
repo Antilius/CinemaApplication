@@ -1,6 +1,7 @@
 package GUI;
 
 import Memory.HallsForDayInMemory;
+import Memory.MoviesInMemory;
 import Memory.OneDayRepertoireInMemory;
 import Memory.PeopleInMemory;
 import ObjectsInCinema.Booking;
@@ -14,6 +15,7 @@ import PersonalizedDates.DateFormatting;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -74,18 +76,23 @@ public class MainFrame extends JFrame{
         HallsForDayInMemory.prepareHallsForNewDay(date);
         HashMap users = PeopleInMemory.load();
         HashMap halls = HallsForDayInMemory.load(date);
+        HashMap<String, Movie> movies = new HashMap();
         OneDayRepertoire oneDayRep = new OneDayRepertoire(date);
         Movie movie = new Movie("Kubuś Puchatek i przyjaciele","Director",MovieType.ACTION,16,234);
+        movies.put(movie.getTitle(), movie);
         Showing showing1 = new Showing(movie, 2, "01.30");
         oneDayRep.addShowingToRepertoire(showing1, halls);
         Movie movie1 = new Movie("Kaczor Donald i wesołe przygody","Director",MovieType.ACTION,16,123);
-        Showing showing2 = new Showing(movie1, 1, "10.30");
+        movies.put(movie1.getTitle(), movie1);
+        Showing showing2 = new Showing(movie1, 1, "22.30");
         oneDayRep.addShowingToRepertoire(showing2, halls);
         //Showing showing3 = new Showing(movie, 5, "19.30");
         //oneDayRep.addShowingToRepertoire(showing3, halls);
-        
+        MoviesInMemory.save(movies);
         BookedPlace place = new BookedPlace(15,20);
         Booking booking = new Booking(date, (Person)users.get("jan"), showing1, place);
+        booking.acceptingBooking(booking);
+        booking = new Booking(date, (Person)users.get("hubert"), showing2, place);
         booking.acceptingBooking(booking);
         
         HallsForDayInMemory.save(halls, date);

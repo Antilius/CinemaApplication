@@ -1,8 +1,10 @@
 package ObjectsInCinema;
 
+import Memory.BookingInMemory;
 import Memory.ViewOfHallInMemory;
 import People.Person;
 import PersonalizedDates.DateFormatting;
+import java.util.ArrayList;
 
 public class Booking {
     
@@ -36,12 +38,16 @@ public class Booking {
     
     public void acceptingBooking(Booking booking){
         ViewOfHall viewOfHall = ViewOfHallInMemory.load(this.showing, this.date);
+        ArrayList<Booking> bookings = new ArrayList();
+        bookings = BookingInMemory.load(this.person.getLogin());
         int[][] places = viewOfHall.getPlaces();
         if(places[this.place.getRow()-1][this.place.getPlace()-1] == 0){
             places[this.place.getRow()-1][this.place.getPlace()-1] = 1;
+            bookings.add(this);
         }
         String nazwa = "ViewsOfHalls/Hall "+showing.getHallNumber()+" for "+this.date.withoutHoursDateFormat()+" "+showing.getHour()+".txt";
         viewOfHall.setPlaces(places);
         ViewOfHallInMemory.save(viewOfHall, nazwa);
+        BookingInMemory.save(this.person.getLogin(), bookings, this.date);
     }
 }

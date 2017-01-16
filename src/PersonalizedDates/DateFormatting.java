@@ -40,4 +40,5 @@ public class DateFormatting extends Date{
     public String withoutHoursDateFormat(){
         return DateFormat.getDateInstance(DateFormat.LONG).format(this);
     }
+    
 }
