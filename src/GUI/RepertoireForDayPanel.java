@@ -1,13 +1,10 @@
 package GUI;
 
 import GUI.Buttons.ButtonInRepertoirePanel;
-import ObjectsInCinema.Movie;
 import PersonalizedDates.DateFormatting;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -43,7 +40,7 @@ public final class RepertoireForDayPanel extends JPanel{
             date_bar_buttons.setOpaque(true);
         this.add(date_bar_buttons);
         
-        JPanel complete_rep = new RepertoirePreview(new LinkedList<Movie>());
+        JPanel complete_rep = new RepertoirePreview(date);
         this.add(complete_rep);
         //setting layout
         Dimension date_bar_buttons_size = date_bar_buttons.getPreferredSize();

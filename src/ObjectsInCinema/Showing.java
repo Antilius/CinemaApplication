@@ -29,4 +29,12 @@ public class Showing {
         int boxNumber = Integer.valueOf(hour.substring(0, 2))*6+Integer.valueOf(hour.substring(3, 5))/10;
         return boxNumber;
     }
+    
+    public static int hourStart(String hour){
+        return Integer.parseInt(hour.substring(0, 2));
+    }
+    
+    public static int minuteStart(String hour){
+        return Integer.parseInt(hour.substring(3, 5));
+    }
 }
