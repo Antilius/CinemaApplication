@@ -24,7 +24,7 @@ public class PersonTest {
     @Test
     public void loginUsingWrongLogin()
     {
-        Boolean login = Person.checkPerson("huberta","lasota");
+        Boolean login = Person.checkPerson("huberta","hubert");
         assertEquals(false, login);
         
     }
@@ -32,13 +32,13 @@ public class PersonTest {
     @Test
     public void loginUsingWrongPassword()
     {
-        Boolean login = Person.checkPerson("hubert","laaaasota");
+        Boolean login = Person.checkPerson("hubert","sdasda");
         assertEquals(false, login);
     }
     
     @Test
     public void loginUsingCorrectData(){
-        Boolean login = Person.checkPerson("hubert","lasota");
+        Boolean login = Person.checkPerson("hubert","hubert");
         assertEquals(true, login);
     }
     
