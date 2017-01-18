@@ -2,10 +2,16 @@ package GUI;
 
 import GUI.Buttons.ButtonChangingTextColor;
 import GUI.Buttons.ButtonGettingUser;
+import Memory.BookingInMemory;
+import Memory.PeopleInMemory;
+import ObjectsInCinema.Booking;
+import People.Person;
 import PersonalizedDates.DateFormatting;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -96,54 +102,76 @@ public final class MainPanel extends JPanel{
         rep.setBounds((width-rep_size.width)/2, 200, rep_size.width, rep_size.height);
     }
     
-    public void printProfile(int width,int height){
+    public void printProfile(String user, int width,int height){
+        HashMap<String, Person> users = PeopleInMemory.load();
+        ArrayList<Booking> bookings = BookingInMemory.load(user);
+        Person person = users.get(user);
         //setting properties
         this.setLayout(null);
         this.setBackground(Color.BLACK);  
         this.setPreferredSize(new Dimension(width,height));
         this.setVisible(true);
         //adding components
+        if(!user.equals("Guest")){
         JLabel text1 = new JLabel("Twój profil:");
         text1.setFont(new Font("Times Roman",Font.BOLD,20));
         text1.setForeground(Color.ORANGE);
         this.add(text1);
-        JLabel photo = new JLabel("PHOTO", SwingConstants.CENTER);
-            photo.setPreferredSize(new Dimension(200,200));
-            photo.setFont(new Font("Times Roman",Font.PLAIN,40));
-            photo.setForeground(Color.BLACK);
-            photo.setOpaque(true);
-            photo.setBackground(Color.WHITE);
-        this.add(photo);
         JLabel text2 = new JLabel("Rezerwacje: ");
         text2.setFont(new Font("Times Roman",Font.BOLD,20));
         text2.setForeground(Color.ORANGE);
         this.add(text2);
-        JLabel text3 = new JLabel("Imie i nazwisko");
+        JLabel text3 = new JLabel("Imie i nazwisko: "+person.getName()+" "+person.getSurname());
         text3.setFont(new Font("Times Roman",Font.BOLD,20));
-        text3.setForeground(Color.ORANGE);
+        text3.setForeground(Color.RED);
         this.add(text3);
-        JLabel text4 = new JLabel("Email");
+        JLabel text4 = new JLabel("Email: "+person.getEmail());
         text4.setFont(new Font("Times Roman",Font.BOLD,20));
-        text4.setForeground(Color.ORANGE);
+        text4.setForeground(Color.RED);
         this.add(text4);
-        JLabel text5 = new JLabel("Rodzaj konta");
+        JLabel text5;
+        if(person.isCanChange())
+            text5 = new JLabel("Rodzaj konta: Administrator");
+        else
+            text5 = new JLabel("Rodzaj konta: Użytkownik");
         text5.setFont(new Font("Times Roman",Font.BOLD,20));
-        text5.setForeground(Color.ORANGE);
+        text5.setForeground(Color.RED);
         this.add(text5);
+        JLabel text8;
+        for(int i=0; i<bookings.size(); i++){
+            text8 = new JLabel("- Tytuł: "+bookings.get(i).getShowing().getMovie().getTitle()+" Data: "+bookings.get(i).getDate().withoutHoursDateFormat()+" Godzina: "+bookings.get(i).getShowing().getHour()+" Sala: "+bookings.get(i).getShowing().getHallNumber());
+            text8.setFont(new Font("Times Roman",Font.BOLD,20));
+            text8.setForeground(Color.RED);
+            this.add(text8);
+            Dimension text8_size = text8.getPreferredSize();
+            text8.setBounds(20, 205 + i*25,text8_size.width, text8_size.height);
+        }
         //setting layout
         Dimension text1_size = text1.getPreferredSize();
-        Dimension photo_size = photo.getPreferredSize();
         Dimension text2_size = text2.getPreferredSize();
         Dimension text3_size = text3.getPreferredSize();
         Dimension text4_size = text4.getPreferredSize();
         Dimension text5_size = text5.getPreferredSize();
         
         text1.setBounds(10, 10,text1_size.width, text1_size.height);
-        text2.setBounds(10, 300,text2_size.width, text2_size.height);
-        text3.setBounds(220, 60,text3_size.width, text3_size.height);
-        text4.setBounds(220, 90,text4_size.width, text4_size.height);
-        text5.setBounds(220, 120,text5_size.width, text5_size.height);
-        photo.setBounds(10, 60, photo_size.width, photo_size.height);
+        text2.setBounds(10, 180,text2_size.width, text2_size.height);
+        text3.setBounds(20, 60,text3_size.width, text3_size.height);
+        text4.setBounds(20, 90,text4_size.width, text4_size.height);
+        text5.setBounds(20, 120,text5_size.width, text5_size.height);
+        }else{
+            JLabel text6 = new JLabel("Korzystasz z aplikacji jako gość. ");
+            text6.setFont(new Font("Times Roman",Font.BOLD,20));
+            text6.setForeground(Color.RED);
+            this.add(text6);
+            JLabel text7 = new JLabel("Zaloguj się, aby przeglądać szczegóły dotyczące Twojego konta.");
+            text7.setFont(new Font("Times Roman",Font.BOLD,20));
+            text7.setForeground(Color.RED);
+            this.add(text7);
+            Dimension text6_size = text6.getPreferredSize();
+            Dimension text7_size = text7.getPreferredSize();
+            text6.setBounds(10, 10, text6_size.width, text6_size.height);
+            text7.setBounds(10, 40, text7_size.width, text7_size.height);
+        }
     }
     
     private JPanel prepareUserPanel(String user){

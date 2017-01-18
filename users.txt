@@ -1,12 +1,12 @@
-hubert
-lasota
+Hubert
+Lasota
 511713563
 lasota.hubert@onet.pl
 hubert
 hubert
 true
-jan
-kowalski
+Jan
+Kowalski
 1234556789
 jan.kowalski@gmail.com
 jan

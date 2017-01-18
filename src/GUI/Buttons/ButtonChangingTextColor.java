@@ -15,10 +15,12 @@ public class ButtonChangingTextColor extends ChangingPanelButtonWithText impleme
     private final Color main_color;
     private final Color mouse_on_button_color;
     private final JPanel context;
+    private final String user;
    
     public ButtonChangingTextColor(String textInsideButton, JPanel panel_to_clear, int text_size, Color main_color, Color mouse_on_button_color, Color background_color){
         super(textInsideButton, panel_to_clear, text_size);
         //setting fields
+        this.user = textInsideButton;
         this.main_color=main_color;
         this.mouse_on_button_color=mouse_on_button_color;
         this.context=this.getPanelToClear();
@@ -64,7 +66,7 @@ public class ButtonChangingTextColor extends ChangingPanelButtonWithText impleme
     public void mouseReleased(MouseEvent event) {
         if(event.getSource() == this){
             ((MainPanel)this.context).removeAll();
-            ((MainPanel)this.context).printProfile(((MainPanel)this.context).getWidth(),((MainPanel)this.context).getHeight());
+            ((MainPanel)this.context).printProfile(this.user,((MainPanel)this.context).getWidth(),((MainPanel)this.context).getHeight());
             ((MainPanel)this.context).revalidate();
             ((MainPanel)this.context).repaint();
         }

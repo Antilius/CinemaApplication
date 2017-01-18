@@ -41,7 +41,7 @@ public class Booking {
         ArrayList<Booking> bookings = new ArrayList();
         bookings = BookingInMemory.load(this.person.getLogin());
         int[][] places = viewOfHall.getPlaces();
-        if(places[this.place.getRow()-1][this.place.getPlace()-1] == 0){
+        if(places[this.place.getRow()-1][this.place.getPlace()-1] == 0 ){
             places[this.place.getRow()-1][this.place.getPlace()-1] = 1;
             bookings.add(this);
         }
