@@ -11,16 +11,16 @@ public class Person {
     private String email;
     private String login;
     private String password;
-    private boolean canChange;   // pozwala odroznic usera od admina
+    private boolean admin;   // pozwala odroznic usera od admina
     
-    public Person(String name, String surname, int phoneNumber, String email, String login, String password, Boolean canChange) {
+    public Person(String name, String surname, int phoneNumber, String email, String login, String password, Boolean admin) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.login = login;
         this.password = password;
-        this.canChange = canChange;
+        this.admin = admin;
     }
     
     public String getName() {
@@ -47,8 +47,8 @@ public class Person {
         return password;
     }
 
-    public boolean isCanChange() {
-        return canChange;
+    public boolean isAdmin() {
+        return admin;
     }
     
     public static boolean checkPerson (String login, String password){
@@ -64,5 +64,17 @@ public class Person {
            }
         }
         return correct;
+    }
+    
+    public static boolean isThisUserAdmin(String user){
+        HashMap<String, Person> people = new HashMap();
+        people = PeopleInMemory.load();
+        Set keys = people.keySet();
+        for(Object key: keys){
+           if(people.get(key).getLogin().equals(user)){
+               return people.get(key).isAdmin();
+           }
+        }
+        return false;
     }
 }

@@ -1,20 +1,20 @@
 package ObjectsInCinema;
 
 public enum MovieType {
-    COMEDY,
-    THRILLER ,
-    DRAMA,
     ACTION,
     ADVENTURE,
     ANIMATED,
     BIOGRAPHICAL,
     CABARET,
-    CARTOON, 
-    CRIME, 
-    ROMANTIC,
+    CARTOON,
+    COMEDY,
+    CRIME,
     DOCUMENTARY,
-    SCIENCE_FICTION,
+    DRAMA,
     HORROR,
     MUSICAL,
+    ROMANTIC,
+    SCIENCE_FICTION,
+    THRILLER,
     WAR
 }

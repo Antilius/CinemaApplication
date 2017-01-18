@@ -23,7 +23,7 @@ public class PeopleInMemory {
                write.println(user.getEmail());
                write.println(user.getLogin());
                write.println(user.getPassword());
-               write.println(user.isCanChange());
+               write.println(user.isAdmin());
             }
             write.close();
         } catch (FileNotFoundException ex) {

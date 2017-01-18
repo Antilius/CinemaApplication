@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,10 +34,10 @@ public class Resolution{
     }
     
     public static void askForResolutionIfNotChosen(boolean isChosen){
-        final JFrame resolutionChooser = new JFrame(RESOLUTION_FRAME_TITLE);
-        
+        final JDialog resolutionChooser = new JDialog();
+        resolutionChooser.setTitle(RESOLUTION_FRAME_TITLE);
         //setting main preferences
-        resolutionChooser.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        resolutionChooser.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         resolutionChooser.setSize(new Dimension(175,125));
         resolutionChooser.setResizable(false);
         resolutionChooser.setLocation(300, 200);
@@ -46,7 +47,7 @@ public class Resolution{
         resolutionChooser.setVisible(true);
     }
     
-    public static JPanel mainPanelForResolutionChoosing(final JFrame whatToClose){
+    public static JPanel mainPanelForResolutionChoosing(final JDialog whatToClose){
         JPanel main = new JPanel();
         main.setLayout(null);
         //adding components
@@ -68,7 +69,7 @@ public class Resolution{
         return main;
     }
     
-    public static JButton createClosingButton(final JFrame windowToClose, final JComboBox comboBox){
+    public static JButton createClosingButton(final JDialog windowToClose, final JComboBox comboBox){
         JButton closingButton = new JButton("OK");
         closingButton.addActionListener(new ActionListener(){
             @Override

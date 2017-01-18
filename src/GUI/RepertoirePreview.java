@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 public class RepertoirePreview extends JPanel{
     
-    private static final int BOX_WIDTH_IN_PIXELS=(MainFrame.setPossibleDimensionWidth())/144;
+    private static final int BOX_WIDTH_IN_PIXELS=evaluateMaxWidth();
     private static final int HOUR_BOX_WIDTH=BOX_WIDTH_IN_PIXELS*6;
     
     private int height;
@@ -57,7 +57,7 @@ public class RepertoirePreview extends JPanel{
             generalHeight+=movie_size.height;
             this.setHeight(generalHeight);
         }
-        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,getTotalHeight(date)));
+        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,200));
     }
     
     public static MultiLineTextPainter filmLengthVisualize(Movie m,boolean possible){
@@ -74,6 +74,10 @@ public class RepertoirePreview extends JPanel{
         return (minutes%10>=5) ? ((minutes/10 + 1)*BOX_WIDTH_IN_PIXELS) : ((minutes/10)*BOX_WIDTH_IN_PIXELS);
     }
 
+    public static int evaluateMaxWidth(){
+        return ((MainFrame.readPossibleDimensionWidth()/144)*150>=MainFrame.readPossibleDimensionWidth()) ? ((MainFrame.readPossibleDimensionWidth()/144)-1) : (MainFrame.readPossibleDimensionWidth()/144);
+    }
+    
     public void setHeight(int height) {
         this.height = height;
     }

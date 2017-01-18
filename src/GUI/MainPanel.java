@@ -19,7 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public final class MainPanel extends JPanel {
+public final class MainPanel extends JPanel implements PanelInsideFrame{
 
     private final int width;
     private final int height;
@@ -27,6 +27,9 @@ public final class MainPanel extends JPanel {
     public MainPanel(int width, int height) {
         this.width = width;
         this.height = height;
+        this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło      
+        this.setSize(new Dimension(width, height));
+        this.setVisible(true);
         printThis(width, height);
     }
 
@@ -43,10 +46,7 @@ public final class MainPanel extends JPanel {
     public void printThis(int width, int height) {
         //setting properties
         this.setLayout(null);
-        this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło      
-        this.setSize(new Dimension(width, height));
-        this.setVisible(true);
-
+        
         //adding components
         JLabel text = new JLabel("Login to your cinema account:");
         text.setFont(new Font("Times Roman", Font.PLAIN, 20));
@@ -75,9 +75,7 @@ public final class MainPanel extends JPanel {
     public void printThisAfterLogin(String user, int width, int height) {
         //seting properties       
         this.setLayout(null);
-        this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło   
-        this.setPreferredSize(new Dimension(width, height));
-        this.setVisible(true);
+        
         //adding components
         JLabel logo = new JLabel("LOGO", SwingConstants.CENTER);
         logo.setPreferredSize(new Dimension(200, 100));
@@ -108,9 +106,7 @@ public final class MainPanel extends JPanel {
         Person person = users.get(user);
         //setting properties
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
-        this.setPreferredSize(new Dimension(width, height));
-        this.setVisible(true);
+        
         //adding components
         if (!user.equals("Guest")) {
             JLabel text1 = new JLabel("Twój profil:");
@@ -130,7 +126,7 @@ public final class MainPanel extends JPanel {
             text4.setForeground(Color.RED);
             this.add(text4);
             JLabel text5;
-            if (person.isCanChange()) {
+            if (person.isAdmin()) {
                 text5 = new JLabel("Rodzaj konta: Administrator");
             } else {
                 text5 = new JLabel("Rodzaj konta: Użytkownik");
@@ -183,6 +179,9 @@ public final class MainPanel extends JPanel {
             Dimension headline5_size = headline5.getPreferredSize();
             Dimension headline6_size = headline6.getPreferredSize();
 
+            //Wartość w SetBounds wyliczać na podstawie stałych w MainFrame
+            //bo nie dostosowują się do wybranej rozdzielczości - obsługuje tylko 1024x800
+            
             headline1.setBounds(20, 205, headline1_size.width, headline1_size.height);
             headline2.setBounds(420, 205, headline2_size.width, headline2_size.height);
             headline3.setBounds(620, 205, headline3_size.width, headline3_size.height);
@@ -231,6 +230,9 @@ public final class MainPanel extends JPanel {
             component6.setBounds(920, 230 + i * 25, component6_size.width, component6_size.height);
             }
         } else {
+            
+            //TUTAJ Użycie MultiLineTextPainter, zamiast rozbijac na dwa JLabele :P
+                
             JLabel text6 = new JLabel("Korzystasz z aplikacji jako gość. ");
             text6.setFont(new Font("Times Roman", Font.BOLD, 20));
             text6.setForeground(Color.RED);

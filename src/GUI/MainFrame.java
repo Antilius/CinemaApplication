@@ -15,7 +15,6 @@ import PersonalizedDates.DateFormatting;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -24,12 +23,14 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame{
     
     public static final String CINEMA_APP_VERSION="Cinema Application v 1.0 (Beta): group project";
+    public static final int FRAME_X_POSITION = 300;
+    public static final int FRAME_Y_POSITION = 200;
     
     public MainFrame(int width, int height){
         super(CINEMA_APP_VERSION);
         this.setSize(new Dimension(width, height));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocation(300,200); 
+        this.setLocation(FRAME_X_POSITION,FRAME_Y_POSITION); 
         this.setResizable(false);
         //adding components       
         JPanel GUIwhenAppOpened = new MainPanel(width, height);
@@ -37,7 +38,7 @@ public class MainFrame extends JFrame{
         this.setVisible(true);         
     }
    
-    public static int setPossibleDimensionWidth(){
+    public static int readPossibleDimensionWidth(){
         File prop = new File("properties.txt");
         Scanner propertiesFileScanner = null;
         try {
@@ -45,6 +46,20 @@ public class MainFrame extends JFrame{
         } catch (FileNotFoundException ex) {
             System.err.println(ex.getClass().toString() + " while scanning file.");
         }
+        int width = propertiesFileScanner.nextInt();
+        propertiesFileScanner.close();
+        return width;
+    }
+    
+    public static int readPossibleDimensionHeight(){
+        File prop = new File("properties.txt");
+        Scanner propertiesFileScanner = null;
+        try {
+            propertiesFileScanner = new Scanner(prop);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex.getClass().toString() + " while scanning file.");
+        }
+        propertiesFileScanner.nextInt();
         int width = propertiesFileScanner.nextInt();
         propertiesFileScanner.close();
         return width;

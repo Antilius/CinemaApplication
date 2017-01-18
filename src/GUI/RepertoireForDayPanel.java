@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public final class RepertoireForDayPanel extends JPanel{
     
-    public static final int MAX_PANEL_WIDTH=MainFrame.setPossibleDimensionWidth();
+    public static final int MAX_PANEL_WIDTH=MainFrame.readPossibleDimensionWidth();
     
     private static final Color COLOR_OF_BACKGROUND=Color.WHITE;
     
@@ -28,14 +28,14 @@ public final class RepertoireForDayPanel extends JPanel{
         //adding components
         JPanel date_bar_buttons = new JPanel();
         date_bar_buttons.setBackground(COLOR_OF_BACKGROUND);
-            ButtonInRepertoirePanel previous = new ButtonInRepertoirePanel(DateFormatting.previousDay(date).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,DateFormatting.previousDay(date),true);
+            ButtonInRepertoirePanel previous = new ButtonInRepertoirePanel((date.previousDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.previousDay(),true);
             date_bar_buttons.add(previous.getThisButtonAsJButton());
                 JLabel actual = new JLabel(date.withoutHoursDateFormat());
                 actual.setBackground(COLOR_OF_BACKGROUND);
                 actual.setForeground(Color.BLACK);
                 actual.setFont(new Font("Times Roman",Font.PLAIN,20));
             date_bar_buttons.add(actual);
-            ButtonInRepertoirePanel next = new ButtonInRepertoirePanel(DateFormatting.nextDay(date).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,DateFormatting.nextDay(date),true);
+            ButtonInRepertoirePanel next = new ButtonInRepertoirePanel((date.nextDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.nextDay(),true);
             date_bar_buttons.add(next.getThisButtonAsJButton());
             date_bar_buttons.setOpaque(true);
         this.add(date_bar_buttons);

@@ -15,12 +15,12 @@ public class DateFormatting extends Date{
         super(l);
     }
     
-    public static DateFormatting nextDay(DateFormatting date){
-        return new DateFormatting(date.getTime()+TWENTY_FOUR_HOURS_IN_MILISECONDS);
+    public DateFormatting nextDay(){
+        return new DateFormatting(this.getTime()+TWENTY_FOUR_HOURS_IN_MILISECONDS);
     }
     
-    public static DateFormatting previousDay(DateFormatting date){
-        return new DateFormatting(date.getTime()-TWENTY_FOUR_HOURS_IN_MILISECONDS);
+    public DateFormatting previousDay(){
+        return new DateFormatting(this.getTime()-TWENTY_FOUR_HOURS_IN_MILISECONDS);
     }
     
     public static int convertTimeToMinutes(DateFormatting date){
