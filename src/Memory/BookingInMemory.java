@@ -1,5 +1,6 @@
 package Memory;
 
+import ObjectsInCinema.BookedPlace;
 import ObjectsInCinema.Booking;
 import ObjectsInCinema.Movie;
 import ObjectsInCinema.Showing;
@@ -25,6 +26,8 @@ public class BookingInMemory {
                 write.println(booking.getDate().getTime());
                 write.println(booking.getShowing().getHour());
                 write.println(booking.getShowing().getHallNumber());
+                write.println(booking.getPlace().getRow());
+                write.println(booking.getPlace().getPlace());
             }
             write.close();
         } catch (FileNotFoundException ex) {
@@ -38,6 +41,7 @@ public class BookingInMemory {
         HashMap<String, Movie> movies = MoviesInMemory.load();
         HashMap<String, Person> users = PeopleInMemory.load();
         Person person = users.get(user);
+        BookedPlace bookedPlace;
         try {
             Scanner reader = new Scanner(bookingFile);
             String title;
@@ -52,8 +56,9 @@ public class BookingInMemory {
                 date = new DateFormatting(Long.parseLong(reader.nextLine()));
                 hour = reader.nextLine();
                 hallNumber = Integer.parseInt(reader.nextLine());
+                bookedPlace = new BookedPlace(Integer.parseInt(reader.nextLine()),Integer.parseInt(reader.nextLine()));
                 showing = new Showing(movie, hallNumber, hour);
-                Booking booking = new Booking(date, person, showing, null);
+                Booking booking = new Booking(date, person, showing, bookedPlace);
                 bookings.add(booking);
             }
             

@@ -73,7 +73,7 @@ public class MainFrame extends JFrame{
         }
         
         DateFormatting date = new DateFormatting();
-        HallsForDayInMemory.prepareHallsForNewDay(date);
+        //HallsForDayInMemory.prepareHallsForNewDay(date);
         HashMap users = PeopleInMemory.load();
         HashMap halls = HallsForDayInMemory.load(date);
         HashMap<String, Movie> movies = new HashMap();
@@ -89,11 +89,11 @@ public class MainFrame extends JFrame{
         //Showing showing3 = new Showing(movie, 5, "19.30");
         //oneDayRep.addShowingToRepertoire(showing3, halls);
         MoviesInMemory.save(movies);
-        BookedPlace place = new BookedPlace(15,20);
-        Booking booking = new Booking(date, (Person)users.get("hubert"), showing1, place);
-        booking.acceptingBooking(booking);
-        booking = new Booking(date, (Person)users.get("hubert"), showing2, place);
-        booking.acceptingBooking(booking);
+        BookedPlace place = new BookedPlace(1,1);
+        Booking booking1 = new Booking(date, (Person)users.get("hubert"), showing1, place);
+        booking1.acceptingBooking(booking1);
+        Booking booking2 = new Booking(date, (Person)users.get("hubert"), showing2, place);
+        booking2.acceptingBooking(booking2);
         
         HallsForDayInMemory.save(halls, date);
         OneDayRepertoireInMemory.save(oneDayRep, date);
