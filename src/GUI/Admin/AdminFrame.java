@@ -14,12 +14,12 @@ public class AdminFrame extends JFrame{
     public AdminFrame(String admin){
         super(ADMIN_FRAME_TITLE+admin);
         this.setLocation(ADMIN_FRAME_POSITION_X, ADMIN_FRAME_POSITION_Y);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.add(new AdminPanel());
         this.getContentPane();
         this.pack();
-        this.setVisible(true);
+        this.setVisible(false);
     }
     
     

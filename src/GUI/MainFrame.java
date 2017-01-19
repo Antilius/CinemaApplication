@@ -92,7 +92,7 @@ public class MainFrame extends JFrame{
         HashMap users = PeopleInMemory.load();
         HashMap halls = HallsForDayInMemory.load(date);
         HashMap<String, Movie> movies = new HashMap();
-        OneDayRepertoire oneDayRep = new OneDayRepertoire(date);
+        OneDayRepertoire oneDayRep = OneDayRepertoireInMemory.load(date);
         Movie movie = new Movie("Kubuś Puchatek i przyjaciele","Director",MovieType.ACTION,16,234);
         movies.put(movie.getTitle(), movie);
         Showing showing1 = new Showing(movie, 2, "01.30");

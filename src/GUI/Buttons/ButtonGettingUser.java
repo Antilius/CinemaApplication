@@ -46,9 +46,9 @@ public class ButtonGettingUser extends ChangingPanelButtonWithText implements Ac
                 this.panel_to_replace.printThisAfterLogin(this.textfield.getText(), this.panel_to_replace.getWidth(), this.panel_to_replace.getHeight());
                 this.panel_to_replace.revalidate();
                 this.panel_to_replace.repaint();
-                if(Person.isThisUserAdmin(this.textfield.getText())){
-                    new AdminFrame(this.textfield.getText());
-                }
+                //if(Person.isThisUserAdmin(this.textfield.getText())){
+                  //  new AdminFrame(this.textfield.getText());
+                //}
         }
         else{               
                 JOptionPane.showMessageDialog(this, "Incorrect login or password, please try again or login as a guest", "Incorrect input data!", JOptionPane.ERROR_MESSAGE);  
