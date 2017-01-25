@@ -16,7 +16,7 @@ public class ButtonShowingDialog extends JButton implements ActionListener{
         this.setFont(new Font("Times Roman",Font.PLAIN,text_size));
         this.addActionListener(this);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == this){

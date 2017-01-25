@@ -15,12 +15,14 @@ public class ButtonInRepertoirePanel extends ButtonChangingTextColor implements 
     private final DateFormatting date;
     private final RepertoireForDayPanel context;
     private final boolean clickable;
+    private final String user;
     
-    public ButtonInRepertoirePanel(String textInsideButton, JPanel panel_to_clear, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, DateFormatting date, boolean clickable) {
+    public ButtonInRepertoirePanel(String user, String textInsideButton, JPanel panel_to_clear, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, DateFormatting date, boolean clickable) {
         super(textInsideButton, panel_to_clear, text_size,main_color, mouse_on_button_color, background_color);
         this.date=date;
         this.context=(RepertoireForDayPanel)this.getPanelToClear();
         this.clickable=clickable;
+        this.user = user;
     }
     
     @Override
@@ -43,7 +45,7 @@ public class ButtonInRepertoirePanel extends ButtonChangingTextColor implements 
         if(this.clickable){
             if(event.getSource() == this){
                 this.context.removeAll();                
-                this.context.printThis(this.date);
+                this.context.printThis(this.user,this.date);
                 this.context.revalidate();
                 this.context.repaint();        
             }

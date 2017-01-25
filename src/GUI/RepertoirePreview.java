@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.Buttons.MovieButtonInRepertoirePanel;
 import GUI.TextPainters.MultiLineTextPainter;
 import GUI.TextPainters.TextPainter;
 import Memory.OneDayRepertoireInMemory;
@@ -21,10 +22,10 @@ public class RepertoirePreview extends JPanel{
     
     private int height;
     
-    public RepertoirePreview(DateFormatting date) {
+    public RepertoirePreview(String user, DateFormatting date) {
         super();
         this.height=150;
-        printThis(date);
+        printThis(user, date);
     }
 
     public static int getTotalHeight(DateFormatting date){
@@ -40,7 +41,7 @@ public class RepertoirePreview extends JPanel{
         return generalHeight;
     }
     
-    private void printThis(DateFormatting date) {     
+    private void printThis(String user, DateFormatting date) {     
         //setting properties
         int time_width = 15+TextPainter.lengthOfStringWithSpecifiedFontInPixels("12:12", new Font("Times Roman",Font.BOLD,12));
         int generalHeight = time_width;
@@ -48,12 +49,14 @@ public class RepertoirePreview extends JPanel{
         //adding components
         ArrayList<Showing> showings = OneDayRepertoireInMemory.load(date).getRepertoireForDay();
         for(Showing s:showings){
+            ShowingFrame showingFrame = new ShowingFrame(user, s, date); 
             Movie m = s.getMovie();
             MultiLineTextPainter movie = RepertoirePreview.filmLengthVisualize(m, true);
-            this.add(movie);
-            Dimension movie_size = movie.getPreferredSize();
+            MovieButtonInRepertoirePanel movieButton = new MovieButtonInRepertoirePanel(movie, 10, Color.WHITE, Color.RED, Color.BLACK, showingFrame);
+            this.add(movieButton);
+            Dimension movie_size = movieButton.getPreferredSize();
             int startX = HOUR_BOX_WIDTH*(1+Showing.hourStart(s.getHour()))+getWidthOfMinuteBox(Showing.minuteStart(s.getHour()));
-            movie.setBounds(startX, generalHeight, movie_size.width, movie_size.height);
+            movieButton.setBounds(startX, generalHeight, movie_size.width, movie_size.height);
             generalHeight+=movie_size.height;
             this.setHeight(generalHeight);
         }

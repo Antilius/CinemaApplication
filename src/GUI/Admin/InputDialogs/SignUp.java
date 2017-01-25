@@ -1,13 +1,22 @@
 package GUI.Admin.InputDialogs;
 
 import GUI.Admin.InputDialogs.Factory.PanelFactory;
+import Memory.PeopleInMemory;
+import People.Person;
 import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class SignUp implements PanelFactory{
@@ -17,9 +26,9 @@ public class SignUp implements PanelFactory{
     private JTextField phoneNumber;
     private JTextField email;
     private JTextField login;
-    private JTextField password;
+    private JPasswordField password;
 
-    public SignUp(JTextField name, JTextField surname, JTextField phoneNumber, JTextField email, JTextField login, JTextField password) {
+    public SignUp(JTextField name, JTextField surname, JTextField phoneNumber, JTextField email, JTextField login, JPasswordField password) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -113,5 +122,35 @@ public class SignUp implements PanelFactory{
         user.add(this.password,c);
 
         return user;
-    }    
+    }   
+
+    public String getName(JTextField name) {
+        return name.getText();
+    }
+
+    public String getSurname(JTextField surname) {
+        return surname.getText();
+    }
+
+    public int getPhoneNumber(JTextField phoneNumber) {
+        return Integer.parseInt(phoneNumber.getText());
+    }
+
+    public String getEmail(JTextField email) {
+        return email.getText();
+    }
+
+    public String getLogin(JTextField login) {
+        return login.getText();
+    }
+
+    public static String readPassword(JPasswordField pass){
+        String password="";
+        char[] tab = pass.getPassword();
+        for(int i=0;i<tab.length;i++){
+            password+=tab[i];
+        }
+        return password;
+    }
+    
 }

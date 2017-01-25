@@ -1,7 +1,6 @@
 package GUI;
 
 import GUI.Admin.AdminFrame;
-import GUI.Admin.InputDialogs.AddNewMovie;
 import GUI.Admin.InputDialogs.DialogPattern;
 import GUI.Buttons.AdminPanelButtonChangingTextColor;
 import GUI.Buttons.ButtonChangingTextColor;
@@ -68,7 +67,7 @@ public final class MainPanel extends JPanel implements PanelInsideFrame{
         JButton logIn = new ButtonGettingUser("Login", this, loginField, passwordField, width, height);
         this.add(logIn);
         
-        ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30)).preparePanelForDialog()));
+        ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30)).preparePanelForDialog()));
         this.add(signUpButton);
         
 
@@ -113,8 +112,7 @@ public final class MainPanel extends JPanel implements PanelInsideFrame{
             admin_panel_button.setBounds(width - admin_panel_button_size.width - 20, 40, admin_panel_button_size.width, admin_panel_button_size.height);
             this.add(admin_panel_button);
         }
-            
-        JPanel rep = new RepertoireForDayPanel(new DateFormatting());
+        JPanel rep = new RepertoireForDayPanel(user, new DateFormatting());
         this.add(rep);
         //setting layout
         Dimension logo_size = logo.getPreferredSize();
@@ -268,7 +266,7 @@ public final class MainPanel extends JPanel implements PanelInsideFrame{
             multiLine.setBounds((this.width-multiLine_size.width)/2, 40, multiLine_size.width, multiLine_size.height);
             multiLine.setVisible(true);
             this.add(multiLine);
-            ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30)).preparePanelForDialog()));
+            ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30)).preparePanelForDialog()));
             this.add(signUpButton);
             Dimension signUpButton_size = signUpButton.getPreferredSize();
             signUpButton.setBounds(width - signUpButton_size.width-20, 50, signUpButton_size.width, signUpButton_size.height);

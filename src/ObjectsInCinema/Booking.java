@@ -36,7 +36,8 @@ public class Booking {
         return place;
     }
     
-    public void acceptingBooking(Booking booking){
+    public boolean acceptingBooking(Booking booking){
+        boolean canBeAdd = false;
         ViewOfHall viewOfHall = ViewOfHallInMemory.load(this.showing, this.date);
         ArrayList<Booking> bookings = new ArrayList();
         bookings = BookingInMemory.load(this.person.getLogin());
@@ -44,10 +45,12 @@ public class Booking {
         if(places[this.place.getRow()-1][this.place.getPlace()-1] == 0 ){
             places[this.place.getRow()-1][this.place.getPlace()-1] = 1;
             bookings.add(this);
+            canBeAdd = true;
         }
         String nazwa = "ViewsOfHalls/Hall "+showing.getHallNumber()+" for "+this.date.withoutHoursDateFormat()+" "+showing.getHour()+".txt";
         viewOfHall.setPlaces(places);
         ViewOfHallInMemory.save(viewOfHall, nazwa);
         BookingInMemory.save(this.person.getLogin(), bookings, this.date);
+        return canBeAdd;
     }
 }

@@ -1,8 +1,7 @@
 package GUI.Buttons;
 
-import GUI.Admin.AdminFrame;
-import GUI.Admin.AdminPanel;
-import GUI.MainPanel;
+import GUI.ConfirmingBookingFrame;
+import ObjectsInCinema.Showing;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,29 +11,33 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class AdminPanelButtonChangingTextColor extends ChangingPanelButtonWithText implements MouseListener,ActionListener {
+public class PlaceButton extends ChangingPanelButtonWithText implements MouseListener,ActionListener{
 
     private final Color main_color;
     private final Color mouse_on_button_color;
     private final JPanel context;
-    private final String user;
-    private final AdminFrame adminFrame;
+    private final int row;
+    private final int seat;
+    private Showing showing;
+    private String user;
     
-    public AdminPanelButtonChangingTextColor(String user, String textInsideButton, JPanel panel_to_clear, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, AdminFrame adminFrame)  {
+    public PlaceButton(String user, Showing showing, String textInsideButton, JPanel panel_to_clear, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, int row, int seat) {
         super(textInsideButton, panel_to_clear, text_size);
-        this.user = user;
         this.main_color = main_color;
         this.mouse_on_button_color = mouse_on_button_color;
         this.context = panel_to_clear;
-        this.adminFrame = adminFrame;
         this.setOpaque(true);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setBackground(background_color);
         this.setForeground(main_color);
         this.addMouseListener(this);
         this.addActionListener(this);
+        this.row = row;
+        this.seat = seat;
+        this.showing = showing;
+        this.user = user;
     }
-    
+
     public JButton getThisButtonAsJButton(){
         return this;
     }
@@ -66,7 +69,7 @@ public class AdminPanelButtonChangingTextColor extends ChangingPanelButtonWithTe
     @Override
     public void mouseReleased(MouseEvent event) {
         if(event.getSource() == this){
-            this.adminFrame.setVisible(true);
+            new ConfirmingBookingFrame(this.user, this.showing,this.row, this.seat);
         }
     }
     

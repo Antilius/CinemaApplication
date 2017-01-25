@@ -20,8 +20,7 @@ public class BookingInMemory {
         File bookingFile = new File ("Bookings/"+user+".txt");
         try {
             PrintWriter write = new PrintWriter(bookingFile);
-            for (int i=0; i<bookings.size(); i++) {
-                Booking booking = bookings.get(i);
+            for (Booking booking : bookings) {
                 write.println(booking.getShowing().getMovie().getTitle());
                 write.println(booking.getDate().getTime());
                 write.println(booking.getShowing().getHour());

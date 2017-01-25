@@ -14,11 +14,11 @@ public final class RepertoireForDayPanel extends JPanel{
     
     private static final Color COLOR_OF_BACKGROUND=Color.WHITE;
     
-    public RepertoireForDayPanel(DateFormatting date){
-        printThis(date);
+    public RepertoireForDayPanel(String user, DateFormatting date){
+        printThis(user, date);
     }
     
-    public void printThis(DateFormatting date){
+    public void printThis(String user, DateFormatting date){
         //setting local variables
         int total_height=0;
         //setting properties
@@ -28,19 +28,18 @@ public final class RepertoireForDayPanel extends JPanel{
         //adding components
         JPanel date_bar_buttons = new JPanel();
         date_bar_buttons.setBackground(COLOR_OF_BACKGROUND);
-            ButtonInRepertoirePanel previous = new ButtonInRepertoirePanel((date.previousDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.previousDay(),true);
+            ButtonInRepertoirePanel previous = new ButtonInRepertoirePanel(user,(date.previousDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.previousDay(),true);
             date_bar_buttons.add(previous.getThisButtonAsJButton());
                 JLabel actual = new JLabel(date.withoutHoursDateFormat());
                 actual.setBackground(COLOR_OF_BACKGROUND);
                 actual.setForeground(Color.BLACK);
                 actual.setFont(new Font("Times Roman",Font.PLAIN,20));
             date_bar_buttons.add(actual);
-            ButtonInRepertoirePanel next = new ButtonInRepertoirePanel((date.nextDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.nextDay(),true);
+            ButtonInRepertoirePanel next = new ButtonInRepertoirePanel(user,(date.nextDay()).withoutHoursDateFormat(),this,12, Color.GRAY, Color.RED, COLOR_OF_BACKGROUND,date.nextDay(),true);
             date_bar_buttons.add(next.getThisButtonAsJButton());
             date_bar_buttons.setOpaque(true);
         this.add(date_bar_buttons);
-        
-        JPanel complete_rep = new RepertoirePreview(date);
+        JPanel complete_rep = new RepertoirePreview(user, date);
         this.add(complete_rep);
         //setting layout
         Dimension date_bar_buttons_size = date_bar_buttons.getPreferredSize();

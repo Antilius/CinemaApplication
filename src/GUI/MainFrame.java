@@ -104,7 +104,7 @@ public class MainFrame extends JFrame{
         //Showing showing3 = new Showing(movie, 5, "19.30");
         //oneDayRep.addShowingToRepertoire(showing3, halls);
         MoviesInMemory.save(movies);
-        BookedPlace place = new BookedPlace(1,1);
+        BookedPlace place = new BookedPlace(12,5);
         Booking booking1 = new Booking(date, (Person)users.get("hubert"), showing1, place);
         booking1.acceptingBooking(booking1);
         Booking booking2 = new Booking(date, (Person)users.get("hubert"), showing2, place);
