@@ -5,42 +5,42 @@
  */
 package GUI.Buttons;
 
+import GUI.RepertoirePreview;
 import GUI.ShowingFrame;
 import GUI.TextPainters.MultiLineTextPainter;
-import GUI.TextPainters.OneLineTextPainter;
-import PersonalizedDates.DateFormatting;
+import ObjectsInCinema.Movie;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-/**
- *
- * @author Hubert
- */
-public class MovieButtonInRepertoirePanel extends JButton implements MouseListener,ActionListener {
+
+public class MovieButtonInRepertoirePanel extends JButton implements MouseListener{
 
     private final Color main_color;
     private final Color mouse_on_button_color;
     private final ShowingFrame showingFrame;
+    private final Movie movie;
     
-    public MovieButtonInRepertoirePanel(MultiLineTextPainter text, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, ShowingFrame showingFrame) {
-        super(text.getText());
+    public MovieButtonInRepertoirePanel(Movie movie, int text_size, Color main_color, Color mouse_on_button_color, Color background_color, ShowingFrame showingFrame) {
+        super();
         this.main_color = main_color;
         this.mouse_on_button_color = mouse_on_button_color;
-        this.showingFrame = showingFrame;
-        this.setFont(new Font("Times Roman",Font.PLAIN,text_size));
-        this.setOpaque(true);
+        this.showingFrame = showingFrame; 
+        this.movie = movie;
+        MultiLineTextPainter text = RepertoirePreview.filmLengthVisualize(movie, true);
+        this.setSize(new Dimension(text.getWidth(),text.getHeight()));
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(background_color);
-        this.setForeground(main_color);
+        JPanel lol = new JPanel();
+        lol.setPreferredSize(new Dimension(text.getWidth(),text.getHeight()));
+        lol.setLayout(null);
+        lol.add(text);    
+        lol.setBounds(0, 0, text.getWidth(), text.getHeight());
+        this.add(lol);
         this.addMouseListener(this);
-        this.addActionListener(this);
     }
 
     public JButton getThisButtonAsJButton(){
@@ -54,11 +54,6 @@ public class MovieButtonInRepertoirePanel extends JButton implements MouseListen
     @Override
     public void mouseExited(MouseEvent mouse_event) {
         this.setForeground(this.main_color);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent event) {      
-        ((JButton)event.getSource()).addMouseListener(this);
     }
 
     @Override
@@ -77,5 +72,5 @@ public class MovieButtonInRepertoirePanel extends JButton implements MouseListen
             this.showingFrame.setVisible(true);
         }
     }
-    
+
 }

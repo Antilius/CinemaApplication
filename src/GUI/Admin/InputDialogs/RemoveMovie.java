@@ -18,6 +18,9 @@ public class RemoveMovie implements PanelFactory{
         this.title = title;
     }
 
+    public JTextField getTitle() {
+        return title;
+    }
     
     @Override
     public JComponent preparePanelForDialog() {

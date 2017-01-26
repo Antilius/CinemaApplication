@@ -67,7 +67,8 @@ public final class MainPanel extends JPanel implements PanelInsideFrame{
         JButton logIn = new ButtonGettingUser("Login", this, loginField, passwordField, width, height);
         this.add(logIn);
         
-        ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30)).preparePanelForDialog()));
+        SignUp s_up = new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30));
+        ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", s_up.preparePanelForDialog(), new JButton()));
         this.add(signUpButton);
         
 
@@ -260,13 +261,13 @@ public final class MainPanel extends JPanel implements PanelInsideFrame{
             }
         } else {
             
-            MultiLineTextPainter multiLine = new MultiLineTextPainter("Korzystasz z aplikacji jako gość. Zaloguj się,lub zarejestruj, aby przeglądać szczegóły dotyczące Twojego konta.",
+            MultiLineTextPainter multiLine = new MultiLineTextPainter("You are using application as a Guest. Please log in or register to gain details about your account.",
                                                                       new Font("Times Roman", Font.BOLD, 20), Color.RED, background, 500);
             Dimension multiLine_size = multiLine.getPreferredSize();
             multiLine.setBounds((this.width-multiLine_size.width)/2, 40, multiLine_size.width, multiLine_size.height);
             multiLine.setVisible(true);
             this.add(multiLine);
-            ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30)).preparePanelForDialog()));
+            ButtonShowingDialog signUpButton = new ButtonShowingDialog(12, new DialogPattern("Sign up", new SignUp(new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JTextField(30), new JPasswordField(30)).preparePanelForDialog(), new JButton()));
             this.add(signUpButton);
             Dimension signUpButton_size = signUpButton.getPreferredSize();
             signUpButton.setBounds(width - signUpButton_size.width-20, 50, signUpButton_size.width, signUpButton_size.height);

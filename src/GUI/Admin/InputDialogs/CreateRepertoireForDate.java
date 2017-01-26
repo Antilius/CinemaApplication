@@ -13,7 +13,14 @@ import javax.swing.JPanel;
 
 public class CreateRepertoireForDate implements PanelFactory{
 
+    private JComboBox dates_cb;
+    
     public CreateRepertoireForDate() {
+        this.dates_cb = createComboBoxWithDates();
+    }
+
+    public JComboBox getDates_cb() {
+        return dates_cb;
     }
     
     @Override
@@ -23,27 +30,29 @@ public class CreateRepertoireForDate implements PanelFactory{
         repertoireForDay.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        JLabel dates = new JLabel("Please, choose date for planning repertoire:");
+        repertoireForDay.add(dates,c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5,0,0,0);
+        c.gridx = 0;
+        c.gridy = 1;
+        
+        repertoireForDay.add(this.dates_cb,c); 
+        
+        return repertoireForDay;
+    }
+    
+    private JComboBox createComboBoxWithDates(){
         DateFormatting date = new DateFormatting();
         String[] whatUserCanChooseFromComboBox = new String[7];
         for(int i=0;i<whatUserCanChooseFromComboBox.length;i++){
             whatUserCanChooseFromComboBox[i]=date.withoutHoursDateFormat();
             date=date.nextDay();
         }
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        JLabel dates = new JLabel("Please, choose date for planning repertoire:");
-        repertoireForDay.add(dates,c);
-        JComboBox dates_cb = new JComboBox(whatUserCanChooseFromComboBox);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(5,0,0,0);
-        c.gridx = 0;
-        c.gridy = 1;
-        repertoireForDay.add(dates_cb,c);
-        
-        
-        
-        return repertoireForDay;
+        return new JComboBox(whatUserCanChooseFromComboBox);
     }
     
 }

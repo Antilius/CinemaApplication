@@ -31,6 +31,26 @@ public class AddNewMovie implements PanelFactory{
         this.age = age;
         this.duration = duration;
     }
+
+    public JTextField getTitle() {
+        return title;
+    }
+
+    public JTextField getDirector() {
+        return director;
+    }
+
+    public JComboBox getType() {
+        return type;
+    }
+
+    public JTextField getAge() {
+        return age;
+    }
+
+    public JTextField getDuration() {
+        return duration;
+    }
     
     @Override
     public JComponent preparePanelForDialog() {
@@ -82,7 +102,7 @@ public class AddNewMovie implements PanelFactory{
         c.gridx = 0;
         c.insets = new Insets(5,0,0,0);
         c.gridy = 6;
-        JLabel age = new JLabel("Please, type age for new movie:");
+        JLabel age = new JLabel("Please, type year of broadcast for new movie:");
         movie.add(age,c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -105,5 +125,5 @@ public class AddNewMovie implements PanelFactory{
 
         return movie;
     }
-    
+
 }

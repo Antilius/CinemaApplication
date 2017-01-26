@@ -1,7 +1,6 @@
 package GUI.Admin;
 
 import GUI.MainFrame;
-import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class AdminFrame extends JFrame{

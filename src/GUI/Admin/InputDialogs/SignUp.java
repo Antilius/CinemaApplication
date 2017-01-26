@@ -1,18 +1,10 @@
 package GUI.Admin.InputDialogs;
 
 import GUI.Admin.InputDialogs.Factory.PanelFactory;
-import Memory.PeopleInMemory;
-import People.Person;
 import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.HashMap;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

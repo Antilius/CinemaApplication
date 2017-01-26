@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class DateFormatting extends Date{
 
-    private static final long TWENTY_FOUR_HOURS_IN_MILISECONDS=86400000; 
+    public static final long TWENTY_FOUR_HOURS_IN_MILISECONDS=86400000; 
     
     public DateFormatting() {
         super();

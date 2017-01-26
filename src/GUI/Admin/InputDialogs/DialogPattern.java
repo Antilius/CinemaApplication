@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 
 public class DialogPattern extends JDialog implements ActionListener{
     
-    private final JButton button = new JButton("OK");
+    private final JButton button;
     private final JButton close = new JButton("Cancel");
     
-    public DialogPattern(String title, JComponent component){
+    public DialogPattern(String title, JComponent component, JButton button){
         super();
+        this.button = button;
         this.button.addActionListener(this);
         this.close.addActionListener(this);
         //setting properties
@@ -43,7 +44,7 @@ public class DialogPattern extends JDialog implements ActionListener{
         c.gridx = 0;
         c.gridy = 0;
         c.insets = new Insets(0,0,0,0);
-        bar_buttons.add(this.button, c);
+        bar_buttons.add(button, c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
@@ -62,7 +63,10 @@ public class DialogPattern extends JDialog implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if(event.getSource() == this.button || event.getSource() == this.close){
+        if(event.getSource() == this.close){
+            this.dispose();
+        }
+        if(event.getSource() == button){
             this.dispose();
         }
     }

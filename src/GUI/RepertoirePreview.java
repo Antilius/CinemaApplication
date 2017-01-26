@@ -24,7 +24,7 @@ public class RepertoirePreview extends JPanel{
     
     public RepertoirePreview(String user, DateFormatting date) {
         super();
-        this.height=150;
+        this.height=500;
         printThis(user, date);
     }
 
@@ -51,16 +51,15 @@ public class RepertoirePreview extends JPanel{
         for(Showing s:showings){
             ShowingFrame showingFrame = new ShowingFrame(user, s, date); 
             Movie m = s.getMovie();
-            MultiLineTextPainter movie = RepertoirePreview.filmLengthVisualize(m, true);
-            MovieButtonInRepertoirePanel movieButton = new MovieButtonInRepertoirePanel(movie, 10, Color.WHITE, Color.RED, Color.BLACK, showingFrame);
+            MovieButtonInRepertoirePanel movieButton = new MovieButtonInRepertoirePanel(m, 10, Color.WHITE, Color.RED, Color.BLACK, showingFrame);
             this.add(movieButton);
             Dimension movie_size = movieButton.getPreferredSize();
             int startX = HOUR_BOX_WIDTH*(1+Showing.hourStart(s.getHour()))+getWidthOfMinuteBox(Showing.minuteStart(s.getHour()));
             movieButton.setBounds(startX, generalHeight, movie_size.width, movie_size.height);
             generalHeight+=movie_size.height;
-            this.setHeight(generalHeight);
+            //this.setHeight(generalHeight);
         }
-        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,200));
+        this.setPreferredSize(new Dimension(RepertoireForDayPanel.MAX_PANEL_WIDTH,500));
     }
     
     public static MultiLineTextPainter filmLengthVisualize(Movie m,boolean possible){
@@ -121,7 +120,6 @@ public class RepertoirePreview extends JPanel{
             g.drawLine(start_point, 0, start_point, this.getHeight());
             start_point+=HOUR_BOX_WIDTH;
         }       
-        super.paintComponents(g);
         Color alfa_black = new Color(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue(), 125);
         g.setColor(alfa_black);
         DateFormatting actual_time = new DateFormatting();

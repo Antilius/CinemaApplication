@@ -21,9 +21,9 @@ public class ShowingPanel extends JPanel{
     public ShowingPanel(String user, Showing showing, DateFormatting date) {
         this.setBackground(Color.BLACK);//opcjonalnie można ustawić obraz na tło      
         this.setVisible(true);
-        this.printThis(user, showing, date);
         this.showing = showing;
         this.user = user;
+        this.printThis(user, showing, date);     
     }
     
     public void printThis(String user,Showing showing, DateFormatting date) {
@@ -68,11 +68,13 @@ public class ShowingPanel extends JPanel{
             c.fill = GridBagConstraints.HORIZONTAL;
             button_group.add(text3,c);
             for(int j=1; j<=20; j++){
-                if(viewOfHall.getPlaces()[i-1][j-1]==1)
-                background = Color.gray;
-                else
-                background = Color.green;
-                placeButton = new PlaceButton(user, showing, String.valueOf(j), this, 20, Color.BLACK, Color.RED, background, i, j);
+                if(viewOfHall.getPlaces()[i-1][j-1]==1){
+                    background = Color.RED;
+                }
+                else{
+                    background = Color.green;
+                }              
+                placeButton = new PlaceButton(this, date, user, showing, String.valueOf(j), 20, Color.BLACK, Color.WHITE, background, i, j);
                 button_group.add(placeButton);
             }   
          this.add(button_group,c);
