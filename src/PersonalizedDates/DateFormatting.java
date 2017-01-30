@@ -14,6 +14,9 @@ public class DateFormatting extends Date{
     public DateFormatting(long l) {
         super(l);
     }
+    public DateFormatting(int year, int month, int day){
+        super(year,month,day);
+    }
     
     public DateFormatting nextDay(){
         return new DateFormatting(this.getTime()+TWENTY_FOUR_HOURS_IN_MILISECONDS);
