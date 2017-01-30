@@ -53,8 +53,10 @@ public class Person {
     
     public static boolean checkPerson (String login, String password){
         boolean correct = false;
-        HashMap<String, Person> people = new HashMap();
-        people = PeopleInMemory.load();
+        HashMap<String, Person> people = PeopleInMemory.load();
+        
+        people.get(login);
+        
         Set keys = people.keySet();
         for(Object key: keys){
            if(people.get(key).getLogin().equals(login)){
@@ -69,7 +71,7 @@ public class Person {
     public static boolean isThisUserAdmin(String user){
         HashMap<String, Person> people = new HashMap();
         people = PeopleInMemory.load();
-        Set keys = people.keySet();
+        Set<String> keys = people.keySet();
         for(Object key: keys){
            if(people.get(key).getLogin().equals(user)){
                return people.get(key).isAdmin();

@@ -1,0 +1,14 @@
+Ala
+Makota
+123
+ma@kota.mail.pl
+ala
+ala
+false
+Jan
+Kowalski
+1234556789
+jan.kowalski@gmail.com
+jan
+jan
+false

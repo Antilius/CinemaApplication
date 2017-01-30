@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 
+import Memory.MoviesInMemory;
 import ObjectsInCinema.Movie;
 import ObjectsInCinema.MovieType;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.util.HashMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,34 +19,33 @@ public class MovieTest {
     
     public MovieTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
-    @Test
-    public void addMoviewithoutTitle()
-    {
-       
+     @Test
+    public void LoadAndSavePeopleDontThrowException(){
+       Exception ex = null;
+       HashMap movies = MoviesInMemory.load();
+       try{MoviesInMemory.save(movies);}
+       catch(Exception e){
+           ex =e;
+       }
+       assertEquals(null, ex);
     }
-    public void addExistingMovie(){
+      
+    @Test
+    public void LoadPeopleFromExistingFile(){
+        HashMap movies = MoviesInMemory.load("moviesTest.txt");
+        Movie movie = (Movie) movies.get("Film1");
+        
+        Movie movieExpected = new Movie("Film1", "Dir1", MovieType.ACTION, 16, 111);
+        
+        assertEquals(movie.getAge(), movie.getAge());
+        assertEquals(movie.getDirector(), movie.getDirector());
+        assertEquals(movie.getDuration(), movie.getDuration());
+        assertEquals(movie.getTitle(), movie.getTitle());
+        assertEquals(movie.getType(), movie.getType());
+        
         
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    
 }

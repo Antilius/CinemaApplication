@@ -87,15 +87,20 @@ public class MainFrame extends JFrame{
             }
         }
         
+       // insertDefaultData();
+                
+    }  
+
+    private static void insertDefaultData() {
         DateFormatting date = new DateFormatting();
-        //HallsForDayInMemory.prepareHallsForNewDay(date);
+        HallsForDayInMemory.prepareHallsForNewDay(date);
         HashMap users = PeopleInMemory.load();
         HashMap halls = HallsForDayInMemory.load(date);
         HashMap<String, Movie> movies = new HashMap();
         OneDayRepertoire oneDayRep = OneDayRepertoireInMemory.load(date);
-        Movie movie = new Movie("Kubuś Puchatek i przyjaciele","Director",MovieType.ACTION,16,234);
+        Movie movie = new Movie("Kubuś Puchatek i przyjaciele","Director",MovieType.ACTION,16,124);
         movies.put(movie.getTitle(), movie);
-        Showing showing1 = new Showing(movie, 2, "01.30");
+        Showing showing1 = new Showing(movie, 2, "11.30");
         oneDayRep.addShowingToRepertoire(showing1, halls);
         Movie movie1 = new Movie("Kaczor Donald i wesołe przygody","Director",MovieType.ACTION,16,123);
         movies.put(movie1.getTitle(), movie1);
@@ -104,11 +109,11 @@ public class MainFrame extends JFrame{
         //Showing showing3 = new Showing(movie, 5, "19.30");
         //oneDayRep.addShowingToRepertoire(showing3, halls);
         MoviesInMemory.save(movies);
-        BookedPlace place = new BookedPlace(12,5);
-        Booking booking1 = new Booking(date, (Person)users.get("hubert"), showing1, place);
-        booking1.acceptingBooking(booking1);
-        Booking booking2 = new Booking(date, (Person)users.get("hubert"), showing2, place);
-        booking2.acceptingBooking(booking2);
+        //BookedPlace place = new BookedPlace(12,5);
+        //Booking booking1 = new Booking(date, (Person)users.get("hubert"), showing1, place);
+        //booking1.acceptingBooking(booking1);
+        //Booking booking2 = new Booking(date, (Person)users.get("hubert"), showing2, place);
+        //booking2.acceptingBooking(booking2);
         
         HallsForDayInMemory.save(halls, date);
         OneDayRepertoireInMemory.save(oneDayRep, date);

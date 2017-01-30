@@ -53,6 +53,27 @@ public class PeopleInMemory {
         return people;
     }
     
-    
+    //dopisana do testow
+    public static HashMap load(String file) {
+        File users = new File(file);
+        HashMap<String, Person>  people = new HashMap();
+        try {
+            Scanner reader = new Scanner(users);
+            while(reader.hasNextLine()){
+                String name = reader.nextLine();
+                String surname = reader.nextLine();
+                int phoneNumber = Integer.parseInt(reader.nextLine());
+                String email = reader.nextLine();
+                String login = reader.nextLine();
+                String password = reader.nextLine();
+                boolean canChange = Boolean.parseBoolean(reader.nextLine());
+                Person person = new Person(name, surname, phoneNumber, email, login, password, canChange);
+                people.put(login, person);
+            }
+        } catch (FileNotFoundException ex) {
+            ex.getMessage();
+        }
+        return people;
+    }
     
 }

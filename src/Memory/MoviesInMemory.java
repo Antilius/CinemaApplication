@@ -50,4 +50,25 @@ public class MoviesInMemory {
         return movies;
     }
     
+    //dopisane tylko testow
+    public static HashMap load(String file){
+        File moviesFile = new File (file);
+        HashMap<String, Movie> movies = new HashMap();
+        try {
+            Scanner reader = new Scanner(moviesFile);
+            while(reader.hasNextLine()){
+                String title = reader.nextLine();
+                String director = reader.nextLine();
+                MovieType movieType = MovieType.valueOf(reader.nextLine());
+                int age = Integer.parseInt(reader.nextLine());
+                int duration = Integer.parseInt(reader.nextLine());
+                Movie movie = new Movie(title, director, movieType, age, duration);
+                movies.put(title, movie);
+            }
+            } catch (FileNotFoundException ex) {
+                ex.getMessage();
+                }
+        return movies;
+    }
+    
 }
