@@ -53,7 +53,7 @@ public class PersonTest {
     }
     
     @Test
-    public void ConstructorTest(){
+    public void constructorTest(){
         Person person = new Person("name", "surname", 123, "email", "login", "password", true);
         Person personExpected = new Person("name", "surname", 123, "email", "login", "password", true);
         assertEquals(person.getName(), personExpected.getName());
@@ -67,7 +67,7 @@ public class PersonTest {
     }
     
     @Test
-    public void LoadAndSavePeopleDontThrowException(){
+    public void loadAndSavePeopleDontThrowException(){
        Exception ex = null;
        HashMap users = PeopleInMemory.load();
        try{PeopleInMemory.save(users);}
@@ -78,12 +78,12 @@ public class PersonTest {
     }
     
     @Test(expected=FileNotFoundException.class)
-    public void LoadPeopleNotExistingFile(){
+    public void loadPeopleNotExistingFile(){
         HashMap users = PeopleInMemory.load("userTest.txt");
     }
    
     @Test
-    public void LoadPeopleFromExistingFile(){
+    public void loadPeopleFromExistingFile(){
         HashMap users = PeopleInMemory.load("userTest.txt");
         Person person = (Person) users.get("ala");
         

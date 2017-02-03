@@ -59,4 +59,28 @@ public class OneDayRepertoireInMemory{
         return oneDayRepertoire;
     }
     
+    //do testow dopisalam
+    
+     public static boolean saveWithBool(OneDayRepertoire oneDayRepertoire, DateFormatting date) {
+        File oneDayRep = new File("Repertoires/repertoireFor "+date.withoutHoursDateFormat()+".txt");
+        ArrayList<Showing> repertoireForDay = oneDayRepertoire.getRepertoireForDay();
+        boolean isSaved;
+        try {
+            PrintWriter write = new PrintWriter(oneDayRep);
+           for (Object showing1 : repertoireForDay) {
+                Showing showing = (Showing) showing1;
+                write.println(showing.getMovie().getTitle());
+                write.println(showing.getMovie().getDirector());
+                write.println(showing.getMovie().getType());
+                write.println(showing.getMovie().getAge());
+                write.println(showing.getMovie().getDuration());
+                write.println(showing.getHallNumber());
+                write.println(showing.getHour());
+           }
+           write.close();
+        } catch (Exception ex) {
+            return isSaved=false;
+        }
+        return isSaved=true;
+    }
 }

@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import Memory.BookingInMemory;
+import Memory.MoviesInMemory;
+import Memory.PeopleInMemory;
 import ObjectsInCinema.BookedPlace;
 import ObjectsInCinema.Booking;
 import ObjectsInCinema.Movie;
@@ -11,6 +14,10 @@ import ObjectsInCinema.MovieType;
 import ObjectsInCinema.Showing;
 import People.Person;
 import PersonalizedDates.DateFormatting;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,7 +28,7 @@ import static org.junit.Assert.*;
 public class BookingTest {
     
     public BookingTest() {
-    
+     
     }
     
     @Test
@@ -58,7 +65,7 @@ public class BookingTest {
     }
     
     @Test
-    public void BookingConstructorTest(){
+    public void bookingConstructorTest(){
         //given
         DateFormatting date = new DateFormatting();
         Movie movie = new Movie("title", "dir",MovieType.WAR, 12, 120);
@@ -75,11 +82,48 @@ public class BookingTest {
     }
  
     @Test
-    public void BookedPlaceConstructorTest(){
+    public void bookedPlaceConstructorTest(){
         BookedPlace place = new BookedPlace(1,2);
         assertEquals(1, place.getRow());
         assertEquals(2, place.getPlace());
     }
+   
+    @Test(expected=NullPointerException.class)
+    public void bookingShowingsByUserWithNulls(){
+        BookingInMemory.save(null, null, null);
+    }
     
+    @Test(expected=NullPointerException.class)
+    public void bookingShowingsByUserWithNoUser(){
+        ArrayList showings = new ArrayList();
+        BookingInMemory.save(null,showings , new DateFormatting());
+    }
     
+    @Test(expected=NullPointerException.class)
+    public void bookingShowingsByUserWithNoDate(){
+        String person = PeopleInMemory.load("userTest.txt").get("Ala").toString();
+        ArrayList showings = new ArrayList();
+        BookingInMemory.save(person, showings, null);
+    }
+    
+    @Test(expected=NullPointerException.class)
+    public void bookingShowingsByUserWithNoShowings(){
+        String person = PeopleInMemory.load("userTest.txt").get("Ala").toString();
+        BookingInMemory.save(person, null, new DateFormatting());
+    }
+    
+    @Test
+    public void bookingShowingsByUserWithAllCorrectParams(){
+        String person = PeopleInMemory.load("userTest.txt").get("ala").toString();
+        ArrayList showings = new ArrayList();
+        Movie movie = new Movie("title", "dir", MovieType.WAR, 12, 120);
+        Showing showing = new Showing(movie, 1, "12:02");
+        showings.add(showing);
+        BookingInMemory.save(person, showings, new DateFormatting());
+        
+        ArrayList booking = BookingInMemory.load("ala");
+        
+        assertEquals(movie, booking.get(0));
+    }
+
 }
